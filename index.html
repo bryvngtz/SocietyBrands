@@ -21,7 +21,14 @@ header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:
 .bar{max-width:1200px;margin:auto;padding:12px 20px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px}
 .title img{width:36px;height:36px;object-fit:contain;flex:none}
 .title{display:flex;align-items:center;gap:10px;font-family:Newsreader,Georgia,serif;font-size:1.7rem;font-weight:600;letter-spacing:-.01em;color:var(--brand)}
-.clock{text-align:right;font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+.clock{text-align:left;font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;color:#fff;padding:12px 20px;border-radius:16px;background:linear-gradient(135deg,var(--brand),#2c8fb0);box-shadow:0 10px 24px rgba(31,107,92,.3);position:relative;overflow:hidden;min-width:230px}
+.clock::after{content:"";position:absolute;right:-26px;top:-26px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.14)}
+[data-theme="dark"] .clock{color:#06201a}
+.ck-top{display:flex;align-items:center;gap:7px;font:700 .62rem Manrope,sans-serif;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.live{width:8px;height:8px;border-radius:50%;background:#7dffb0;box-shadow:0 0 0 0 rgba(125,255,176,.7);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(125,255,176,0)}100%{box-shadow:0 0 0 0 rgba(125,255,176,0)}}
+.ck-time{font-size:1.65rem;font-weight:700;line-height:1.25;letter-spacing:.03em}
+.ck-date{font-size:.8rem;font-weight:500;opacity:.92}
 .clock small{display:block;font-size:.68rem;font-weight:500;color:var(--muted);line-height:1.2}
 .tools{display:flex;gap:10px;justify-content:flex-end;align-items:center}
 .search{position:relative}
@@ -30,6 +37,12 @@ header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:
 .results.open{display:block}
 .results button{display:flex;justify-content:space-between;width:100%;padding:10px 14px;background:none;border:0;text-align:left}
 .results button:hover{background:var(--soft)}
+.results{max-height:340px;overflow-y:auto}
+.results button.active{background:var(--soft)}
+.results mark{background:color-mix(in srgb,var(--accent) 45%,transparent);color:inherit;border-radius:3px}
+[id]{scroll-margin-top:150px}
+.flash{animation:flash 1.8s ease}
+@keyframes flash{0%,60%{box-shadow:0 0 0 4px var(--accent),0 0 28px color-mix(in srgb,var(--accent) 60%,transparent)}100%{box-shadow:none}}
 .results span{color:var(--muted);font-size:.78rem}
 .results p{padding:10px 14px;color:var(--muted);font-size:.9rem}
 .icon-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--bg);color:var(--ink);display:grid;place-items:center}
@@ -96,7 +109,7 @@ main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:28px 20px 48px}
 footer{border-top:1px solid var(--line);background:var(--surface)}
 .foot{max-width:1200px;margin:auto;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}
 .foot .l{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
-.flink{background:none;border:0;padding:0;font-size:.76rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.flink{background:none;border:0;padding:0;font-size:.66rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 .flink:hover{color:var(--brand)}
 
 /* Modals */
@@ -135,7 +148,7 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
  .hero,.cards{grid-template-columns:1fr}
  .search input{width:130px}
  nav ul{overflow-x:auto}
- .foot{justify-content:center;text-align:center}.foot .l,.clock{justify-content:center;text-align:center}
+ .foot{justify-content:center;text-align:center}.foot .l{justify-content:center;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -147,7 +160,7 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
     <div class="title"><img src="image/sbi.ico" alt="" width="36" height="36" onerror="this.remove()"><span>Society Brands</span></div>
     <div class="tools">
       <div class="search">
-        <input id="q" type="search" placeholder="Search…" autocomplete="off" aria-label="Search">
+        <input id="q" type="search" placeholder="Search…  ( / )" autocomplete="off" aria-label="Search">
         <div class="results" id="results"></div>
       </div>
       <button class="icon-btn" id="theme" aria-label="Toggle dark mode" title="Dark / light mode"></button>
@@ -166,7 +179,7 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
 <main>
   <div class="logo-slot"><img src="image/societybrands.png" alt="Society Brands" onerror="this.parentNode.className='logo-slot empty';this.parentNode.textContent='Society Brands logo (image/societybrands.png not found)'"></div>
 
-  <section class="hero">
+  <section class="hero" id="intro">
     <div>
       <h1>Society Brands / SixEleven Team</h1>
       <p>The team began its journey on May 1, 2024, with 10 dedicated team members supporting 2 brands. Since then, we have grown to more than 30 team members serving 6 major brands. Our team is committed to delivering exceptional customer experiences through timely assistance, effective problem-solving, and genuine care. This growth reflects our dedication, collaboration, and shared commitment to representing each brand with excellence in every interaction.</p>
@@ -179,12 +192,12 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
     </div>
   </section>
 
-  <div class="ticker" aria-label="Tools and platforms we work with"><div class="track" id="track"></div></div>
+  <div class="ticker" id="partners" aria-label="Tools and platforms we work with"><div class="track" id="track"></div></div>
 
   <section class="cards">
-    <article class="card c-promise"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><span class="tag">Trust</span><h2>Our Promise</h2><p>We elevate every customer experience by delivering responsive, compassionate, and reliable support across every interaction. Our team is committed to building trust, resolving concerns efficiently, and ensuring every customer feels valued while supporting the mission of Society Brands.</p><div class="bar2"></div></article>
-    <article class="card c-mission"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div><span class="tag">Purpose</span><h2>Our Mission</h2><p>Our mission is to provide exceptional customer service that reflects the values of Society Brands and the quality of the brands we support. Through empathy, expertise, and continuous improvement, we strive to create seamless experiences, strengthen customer relationships, and help every customer feel confident in the products they choose.</p><div class="bar2"></div></article>
-    <article class="card c-service"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div><span class="tag">Impact</span><h2>Service That Makes a Meaningful Difference</h2><p>Behind every interaction is a team dedicated to making a positive impact. By providing timely assistance, accurate solutions, and personalized support across all brands, we help create experiences that inspire trust, foster loyalty, and reinforce Society Brands' commitment to health, wellness, and customer satisfaction.</p><div class="bar2"></div></article>
+    <article class="card c-promise" id="promise"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div><span class="tag">Trust</span><h2>Our Promise</h2><p>We elevate every customer experience by delivering responsive, compassionate, and reliable support across every interaction. Our team is committed to building trust, resolving concerns efficiently, and ensuring every customer feels valued while supporting the mission of Society Brands.</p><div class="bar2"></div></article>
+    <article class="card c-mission" id="mission"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div><span class="tag">Purpose</span><h2>Our Mission</h2><p>Our mission is to provide exceptional customer service that reflects the values of Society Brands and the quality of the brands we support. Through empathy, expertise, and continuous improvement, we strive to create seamless experiences, strengthen customer relationships, and help every customer feel confident in the products they choose.</p><div class="bar2"></div></article>
+    <article class="card c-service" id="service"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div><span class="tag">Impact</span><h2>Service That Makes a Meaningful Difference</h2><p>Behind every interaction is a team dedicated to making a positive impact. By providing timely assistance, accurate solutions, and personalized support across all brands, we help create experiences that inspire trust, foster loyalty, and reinforce Society Brands' commitment to health, wellness, and customer satisfaction.</p><div class="bar2"></div></article>
   </section>
 
 </main>
@@ -194,7 +207,11 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
     <div class="l"><span>© Accxs Creations 2026</span>
       <button class="flink" data-soon="Privacy Policy">Privacy Policy</button>
       <button class="flink" data-soon="Terms of Service">Terms of Service</button></div>
-    <div class="clock" id="clock" aria-live="off">--:--:-- | --/--/---- | (---)<small>Philippine Standard Time</small></div>
+    <div class="clock" id="clock" aria-label="Philippine Standard Time">
+      <div class="ck-top"><span class="live"></span>Philippine Standard Time</div>
+      <div class="ck-time" id="ckTime">--:--:--</div>
+      <div class="ck-date" id="ckDate">--/--/---- | (---)</div>
+    </div>
   </div>
 </footer>
 
@@ -299,16 +316,48 @@ let saved=null; try{saved=localStorage.getItem("sb-theme")}catch(e){}
 setTheme(saved|| (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
 $("#theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark");
 
-/* Search */
-const INDEX=[...BRANDS.map(n=>[n,"Brand"]),...UPDATES.map(n=>[n,"Update"]),["About Us","Page"]];
-$("#q").addEventListener("input",e=>{
-  const v=e.target.value.trim().toLowerCase(), box=$("#results"); box.innerHTML="";
-  if(!v){ box.classList.remove("open"); return; }
-  const hits=INDEX.filter(([n])=>n.toLowerCase().includes(v));
-  if(!hits.length){ box.innerHTML="<p>No results found.</p>"; }
-  hits.forEach(([n,t])=>{ const b=document.createElement("button"); b.innerHTML=n+"<span>"+t+"</span>"; b.onclick=()=>{ box.classList.remove("open"); $("#q").value=""; soon(n); }; box.appendChild(b); });
+/* Search: matches pages, brands, updates, partners and the text on this page */
+let INDEX=null, shown=[], act=-1;
+const box=$("#results"), input=$("#q");
+function buildIndex(){
+  const go=id=>()=>{ const el=document.getElementById(id); el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); };
+  const sec=(id,n)=>({n,t:"On this page",k:document.getElementById(id).textContent.toLowerCase().replace(/\s+/g," "),run:go(id)});
+  INDEX=[
+    {n:"About Us",t:"Page",k:"about us team",run:()=>soon("About Us")},
+    ...BRANDS.map(n=>({n,t:"Brand",k:"",run:()=>soon(n)})),
+    ...UPDATES.map(n=>({n,t:"Update",k:"",run:()=>soon(n)})),
+    sec("intro","Society Brands / SixEleven Team"), sec("promise","Our Promise"), sec("mission","Our Mission"), sec("service","Service That Makes a Meaningful Difference"),
+    ...LOGOS.map(f=>({n:f.replace(/\.[^.]+$/,""),t:"Tools & partners",k:"",run:go("partners")})),
+    {n:"Privacy Policy",t:"Footer",k:"",run:()=>soon("Privacy Policy")},
+    {n:"Terms of Service",t:"Footer",k:"",run:()=>soon("Terms of Service")}
+  ];
+}
+function esc(t){return t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function render(v){
+  box.innerHTML=""; act=-1;
+  if(!v){ box.classList.remove("open"); shown=[]; return; }
+  if(!INDEX) buildIndex();
+  const starts=[],has=[],body=[];
+  INDEX.forEach(i=>{ const n=i.n.toLowerCase(); if(n.startsWith(v)) starts.push(i); else if(n.includes(v)) has.push(i); else if(i.k.includes(v)) body.push(i); });
+  shown=[...starts,...has,...body].slice(0,8);
+  if(!shown.length){ box.innerHTML="<p>No results for “"+esc(v)+"”.</p>"; }
+  shown.forEach((i,idx)=>{ const b=document.createElement("button"); b.type="button";
+    const n=i.n, at=n.toLowerCase().indexOf(v);
+    b.innerHTML=(at>=0?esc(n.slice(0,at))+"<mark>"+esc(n.slice(at,at+v.length))+"</mark>"+esc(n.slice(at+v.length)):esc(n))+"<span>"+i.t+"</span>";
+    b.onclick=()=>pick(idx); box.appendChild(b); });
   box.classList.add("open");
+}
+function pick(i){ const it=shown[i]; if(!it) return; box.classList.remove("open"); input.value=""; input.blur(); it.run(); }
+function mark(i){ const bs=[...box.querySelectorAll("button")]; bs.forEach((b,k)=>b.classList.toggle("active",k===i)); act=i; if(bs[i]) bs[i].scrollIntoView({block:"nearest"}); }
+input.addEventListener("input",e=>render(e.target.value.trim().toLowerCase()));
+input.addEventListener("focus",()=>{ if(input.value.trim()) render(input.value.trim().toLowerCase()); });
+input.addEventListener("keydown",e=>{
+  if(e.key==="ArrowDown"){ e.preventDefault(); if(shown.length) mark((act+1)%shown.length); }
+  else if(e.key==="ArrowUp"){ e.preventDefault(); if(shown.length) mark((act-1+shown.length)%shown.length); }
+  else if(e.key==="Enter"){ e.preventDefault(); if(shown.length) pick(act>=0?act:0); }
+  else if(e.key==="Escape"){ box.classList.remove("open"); }
 });
+document.addEventListener("keydown",e=>{ if(e.key==="/"&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)){ e.preventDefault(); input.focus(); } });
 
 /* Running words */
 const LOGOS=["Shopify.png","checkoutchamp.png","gorgias.png","ups.png","USPS.png","17track.png","parcels.png","fedex.png","Yanwen.png","4PX-Express.png","CanadaPost.png","uniuni.png","emile.png","paypal.png","Braintree.png","stripe.png","maverick.png","payarc.png","EasyPay.png","googlesheet.png","microsoftteams.png","Outlook.png","sixeleven.PNG","aircall.png"];
@@ -322,7 +371,7 @@ function tick(){
   const time=d.toLocaleTimeString("en-US",{...tz,hour12:true,hour:"2-digit",minute:"2-digit",second:"2-digit"});
   const date=d.toLocaleDateString("en-US",{...tz,month:"2-digit",day:"2-digit",year:"numeric"});
   const day=d.toLocaleDateString("en-US",{...tz,weekday:"long"});
-  $("#clock").firstChild.nodeValue=time+" | "+date+" | ("+day+")";
+  $("#ckTime").textContent=time; $("#ckDate").textContent=date+" | ("+day+")";
 }
 tick(); setInterval(tick,1000);
 </script>
