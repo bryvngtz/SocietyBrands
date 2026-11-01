@@ -106,6 +106,8 @@ main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:28px 20px 48px}
 footer{border-top:1px solid var(--line);background:var(--surface)}
 .foot{max-width:1200px;margin:auto;padding:8px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:.76rem;color:var(--muted)}
 .foot .l{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+.copy{color:var(--muted);text-decoration:none;font-weight:600}
+.copy:hover{color:var(--brand);text-decoration:underline;text-underline-offset:3px}
 .flink{background:none;border:0;padding:0;font-size:.66rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
 .flink:hover{color:var(--brand)}
 
@@ -160,6 +162,49 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
 .modal .note.small{font-size:.72rem;margin-top:4px}
 .modal .note.lead{text-align:left;margin:0 0 6px;font-size:.84rem}
 .link.inline{display:inline;margin:0;font-size:inherit}
+/* Views: team + gallery */
+.title{cursor:pointer}
+.vhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.vhead small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;color:var(--accent)}
+.vhead h2{font-family:Newsreader,Georgia,serif;font-size:clamp(1.8rem,4vw,2.6rem);line-height:1.1;letter-spacing:-.02em}
+.vhead p{color:var(--muted);margin-top:4px}
+.back{border:1px solid var(--line);background:var(--surface);padding:9px 18px;border-radius:999px;font-weight:700;font-size:.88rem}
+.back:hover{border-color:var(--brand);color:var(--brand)}
+.tier,.grp{margin-bottom:34px}
+.tier>h3,.grp>h3{display:flex;align-items:center;gap:12px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.tier>h3::after,.grp>h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.grp>h3{color:var(--c)}
+.grp>h3 em{font-style:normal;order:1;background:var(--c);color:#fff;border-radius:999px;padding:1px 11px;letter-spacing:0;font-size:.78rem}
+.grp>h3::after{order:2}
+.pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,230px));gap:18px;justify-content:center}
+.pcard{text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 16px 20px;box-shadow:var(--shadow);transition:transform .25s,border-color .25s}
+.pcard:hover{transform:translateY(-6px);border-color:var(--brand)}
+.pcard h4{font-size:1.02rem;margin-top:14px}
+.pcard p{color:var(--muted);font-size:.84rem;line-height:1.4;margin-top:2px}
+.tg{display:inline-block;margin-top:6px;font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);background:var(--soft);border-radius:999px;padding:2px 10px}
+.av{position:relative;flex:none;border-radius:50%;overflow:hidden;background:var(--soft);display:grid;place-items:center;color:#fff;font-weight:800}
+.av i{font-style:normal;position:absolute;inset:0;display:grid;place-items:center}
+.av img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.av.big{width:116px;height:116px;margin:auto;font-size:1.7rem;box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--brand)}
+.av.sm{width:46px;height:46px;font-size:.85rem}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.mcard{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:14px;padding:10px 14px;font-size:.9rem;font-weight:600;transition:transform .2s,box-shadow .2s}
+.mcard:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;grid-auto-flow:dense;gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:18px;margin:0;cursor:zoom-in;background:var(--soft);box-shadow:var(--shadow)}
+.tile.t0{grid-column:span 2;grid-row:span 2}.tile.t4{grid-column:span 2}
+.tile .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-size:.8rem;padding:10px;text-align:center}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.tile:hover img{transform:scale(1.08)}
+.tile figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 12px;color:#fff;font-weight:700;font-size:.9rem;background:linear-gradient(transparent,rgba(0,0,0,.65));opacity:0;transform:translateY(8px);transition:.3s}
+.tile:hover figcaption{opacity:1;transform:none}
+#lb{background:rgba(0,0,0,.88);flex-direction:column}
+#lb.open{display:flex;align-items:center;justify-content:center;gap:12px}
+#lb img{max-width:92vw;max-height:78vh;border-radius:12px;box-shadow:0 20px 60px #000}
+#lb p{color:#fff;font-weight:700}
+.lbn{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:1.6rem}
+.lbn:hover{background:rgba(255,255,255,.32)}
+@media(max-width:860px){.gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}.tile.t0{grid-row:span 2}.tile.t4{grid-column:span 2}}
 @media(max-width:860px){
  .bar{grid-template-columns:1fr auto}
  .hero,.cards{grid-template-columns:1fr}
@@ -194,6 +239,7 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
 </header>
 
 <main>
+  <div id="view-home">
   <div class="logo-slot"><img src="image/societybrands.png" alt="Society Brands" onerror="this.parentNode.className='logo-slot empty';this.parentNode.textContent='Society Brands logo (image/societybrands.png not found)'"></div>
 
   <section class="hero" id="intro">
@@ -217,11 +263,14 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
     <article class="card c-service" id="service"><i class="orb"></i><div class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div><span class="tag">Impact</span><h2>Service That Makes a Meaningful Difference</h2><p>Behind every interaction is a team dedicated to making a positive impact. By providing timely assistance, accurate solutions, and personalized support across all brands, we help create experiences that inspire trust, foster loyalty, and reinforce Society Brands' commitment to health, wellness, and customer satisfaction.</p><div class="bar2"></div></article>
   </section>
 
+</div>
+  <div id="view-team" class="view" hidden></div>
+  <div id="view-gallery" class="view" hidden></div>
 </main>
 
 <footer>
   <div class="foot">
-    <div class="l"><span>© Accxs Creations 2026</span>
+    <div class="l"><a class="copy" href="https://bryangablao.github.io/Accxs-Creations/" target="_blank" rel="noopener noreferrer">© Accxs Creations 2026</a>
       <button class="flink" data-soon="Privacy Policy">Privacy Policy</button>
       <button class="flink" data-soon="Terms of Service">Terms of Service</button></div>
     <div class="clock" id="clock" aria-label="Philippine Standard Time">
@@ -293,8 +342,8 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
 /* Coming soon modal */
 function soon(name){ $("#soonT").textContent=name; $("#soonP").textContent="This feature will be coming soon..."; $("#soonOv").classList.add("open"); closeMenus(); }
-function fill(el,items){ items.forEach(n=>{const b=document.createElement("button");b.textContent=n;b.onclick=()=>soon(n);el.appendChild(b);}); }
-fill($("#brandsDrop"),BRANDS); fill($("#updatesDrop"),UPDATES);
+function fill(el,items,fn=soon){ items.forEach(n=>{const b=document.createElement("button");b.textContent=n;b.onclick=()=>fn(n);el.appendChild(b);}); }
+fill($("#brandsDrop"),BRANDS); fill($("#updatesDrop"),UPDATES,openUpdate);
 $$("[data-soon]").forEach(b=>b.onclick=()=>soon(b.dataset.soon));
 
 /* Dropdowns */
@@ -375,12 +424,13 @@ $("#theme").onclick=()=>setTheme(document.documentElement.dataset.theme==="dark"
 let INDEX=null, shown=[], act=-1;
 const box=$("#results"), input=$("#q");
 function buildIndex(){
-  const go=id=>()=>{ const el=document.getElementById(id); el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); };
+  const go=id=>()=>{ showView("home"); const el=document.getElementById(id); el.scrollIntoView({behavior:"smooth",block:"start"}); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash"); };
   const sec=(id,n)=>({n,t:"On this page",k:document.getElementById(id).textContent.toLowerCase().replace(/\s+/g," "),run:go(id)});
   INDEX=[
     {n:"About Us",t:"Page",k:"about us team",run:()=>soon("About Us")},
     ...BRANDS.map(n=>({n,t:"Brand",k:"",run:()=>soon(n)})),
-    ...UPDATES.map(n=>({n,t:"Update",k:"",run:()=>soon(n)})),
+    ...UPDATES.map(n=>({n,t:"Update",k:"",run:()=>openUpdate(n)})),
+    ...ALLPEOPLE.map(n=>({n,t:"Team member",k:"",run:()=>showView("team")})),
     sec("intro","Society Brands / SixEleven Team"), sec("promise","Our Promise"), sec("mission","Our Mission"), sec("service","Service That Makes a Meaningful Difference"),
     ...LOGOS.map(f=>({n:f.replace(/\.[^.]+$/,""),t:"Tools & partners",k:"",run:go("partners")})),
     {n:"Privacy Policy",t:"Footer",k:"",run:()=>soon("Privacy Policy")},
@@ -429,6 +479,52 @@ function tick(){
   $("#ckTime").textContent=time; $("#ckDate").textContent=date+" | ("+day+")";
 }
 tick(); setInterval(tick,1000);
+
+/* ===== Views: SBI Team Structure + Team Gallery ===== */
+const VIEWS={"SBI Team Structure":"team","Team Gallery":"gallery"};
+function openUpdate(n){ VIEWS[n]?showView(VIEWS[n]):soon(n); closeMenus(); }
+function showView(v){ ["home","team","gallery"].forEach(k=>$("#view-"+k).hidden=k!==v); closeMenus(); window.scrollTo({top:0}); }
+$(".title").onclick=()=>showView("home");
+
+const TIMG="image/team/";
+const MGMT=[
+ ["Executive Leadership",[["Michael Sirpilla","Co-Founder | Chief Executive Officer","chiefexecutiveofficer.png"],["Justin Sirpilla","Co-Founder | President","president.png"],["Shawn Dougherty","Co-Founder | Chief Operations Officer","chiefoperationsoffiecer.png"]]],
+ ["Management",[["Amanda Ake","Brand President","brandpresident.png"],["Chrystal Holden","Customer Care Manager","customercaremanager.png"],["Willy Pedroso","Operations Manager (611)","operationsmanager.png"]]],
+ ["Team Leadership",[["Joshua Bahinting","Senior Team Leader","seniorteamleader.png"],["Johnny Gayo","Team Leader","teamleader.png"]]],
+ ["Officers-In-Charge",[["Julio Carbonell","Officer-In-Charge","officeincharge1.png"],["Marc Adaptar","Officer-In-Charge","officeincharge2.png"],["Zethsu Panilag","Officer-In-Charge","officeincharge3.png"]]]];
+const GROUPS=[
+ ["Customer Service","#1f6b5c",["Abuda, Jemyma Benedae Benian","Andao, Ferrie Mae Villanel","Atas, Leizel Den Lintua","Badilla, Apple Mae Comoylao","Cabantac, Jivy Gubat","Cavan, Hannah Mae","Cavan, Sofia Beanca Binatac","Dandoy, Angelo Pagdato","Domagtoy, Jeneth Fontillas","Eleguir, Joanna Rose Silvosa","Fajardo, Carla Jean Mama","Jabonero, Shella Mae","Malayas, Louie Jay Bayno","Morante, Leonyl Jan","Navarro, Jonarose Himulatan","Sayawan, Christina Orfanel","Sumabong, Aldoresa Fuentes","Tenajeros, Rhea Vhie Robles","Ventic, Trishia"]],
+ ["Live Chat Team","#5b8def",["Regis, Kier Vincent Veluz","Dalion, Kevin Ray Maangue"]],
+ ["Back Office Team","#d39a2c",["Ablao, Bryan Gutierrez","Prietos, Elijun Gualdajara","Alvar, Ralph","Sumagui, Mark Allen Apostol","Naranjo, Mikka Francine","Escarula, Jenelyn Beit","Balao, Jane Ann"]]];
+const ALLPEOPLE=[...MGMT.flatMap(t=>t[1].map(m=>m[0])),...GROUPS.flatMap(g=>g[2])];
+
+const initials=n=>{const c=n.includes(",");const p=c?n.split(",").map(x=>x.trim()):n.split(" ");const a=c?[p[1],p[0]]:[p[0],p[p.length-1]];return(a[0][0]+a[1][0]).toUpperCase();};
+const hue=n=>[...n].reduce((a,c)=>a+c.charCodeAt(0),0)%360;
+const avatar=(n,cls,img)=>'<div class="av '+cls+'"><i style="background:linear-gradient(135deg,hsl('+hue(n)+' 55% 45%),hsl('+(hue(n)+45)+' 60% 34%))">'+initials(n)+'</i>'+(img?'<img src="'+TIMG+img+'" alt="'+n+'" loading="lazy" onerror="this.remove()">':'')+'</div>';
+const pcard=([n,role,img])=>{const [a,b]=role.split(" | ");return '<article class="pcard">'+avatar(n,"big",img)+'<h4>'+n+'</h4>'+(b?'<span class="tg">'+a+'</span><p>'+b+'</p>':'<p>'+a+'</p>')+'</article>';};
+$("#view-team").innerHTML=
+ '<div class="vhead"><div><small>Updates</small><h2>SBI Team Structure</h2><p>'+ALLPEOPLE.length+' team members across management and operations.</p></div><button class="back" data-home>← Back to home</button></div>'+
+ MGMT.map(([t,list])=>'<section class="tier"><h3>'+t+'</h3><div class="pg">'+list.map(pcard).join("")+'</div></section>').join("")+
+ GROUPS.map(([t,c,list])=>'<section class="grp" style="--c:'+c+'"><h3>'+t+'<em>'+list.length+'</em></h3><div class="mg">'+list.map(n=>'<div class="mcard">'+avatar(n,"sm")+'<span>'+n+'</span></div>').join("")+'</div></section>').join("");
+
+const GDIR="image/gallery/"; // falls back to "image/" if a file isn't found there
+const GAL=[["sbirandom6.png","SBI moments"],["sbirandom5.png","SBI moments"],["sbirandom4.png","SBI moments"],["sbirandom3.png","SBI moments"],["halloween2025.png","Halloween 2025"],["sbirandom2.png","SBI moments"],["sbirandom1.jpg","SBI moments"],["christmass2025.png","Christmas 2025"]];
+function galErr(i){ if(!i.dataset.t){ i.dataset.t=1; i.src="image/"+i.dataset.f; } else i.remove(); }
+$("#view-gallery").innerHTML=
+ '<div class="vhead"><div><small>Updates</small><h2>Team Gallery</h2><p>Moments from the Society Brands / SixEleven team.</p></div><button class="back" data-home>← Back to home</button></div>'+
+ '<div class="gal">'+GAL.map(([f,c],i)=>'<figure class="tile t'+i+'" data-i="'+i+'"><span class="ph">'+f+'</span><img src="'+GDIR+f+'" data-f="'+f+'" alt="'+c+'" loading="lazy" onerror="galErr(this)"><figcaption>'+c+'</figcaption></figure>').join("")+'</div>';
+$$("[data-home]").forEach(b=>b.onclick=()=>showView("home"));
+
+/* Lightbox */
+const lb=document.createElement("div"); lb.className="overlay"; lb.id="lb";
+lb.innerHTML='<button class="x lbx" data-close aria-label="Close" style="position:absolute;right:18px;top:12px;font-size:2rem;color:#fff;background:none;border:0">×</button><button class="lbn" id="lbp" style="left:16px" aria-label="Previous">‹</button><button class="lbn" id="lbnx" style="right:16px" aria-label="Next">›</button><img alt=""><p></p>';
+document.body.appendChild(lb);
+let cur=0;
+function lbShow(i){ cur=(i+GAL.length)%GAL.length; const t=$$(".tile")[cur], im=t.querySelector("img"); lb.querySelector("img").src=im?im.src:""; lb.querySelector("p").textContent=GAL[cur][1]; lb.classList.add("open"); }
+$$(".tile").forEach(t=>t.onclick=()=>lbShow(+t.dataset.i));
+$("#lbp").onclick=e=>{e.stopPropagation();lbShow(cur-1);}; $("#lbnx").onclick=e=>{e.stopPropagation();lbShow(cur+1);};
+lb.addEventListener("click",e=>{ if(e.target===lb||e.target.closest("[data-close]")) lb.classList.remove("open"); });
+document.addEventListener("keydown",e=>{ if(!lb.classList.contains("open")) return; if(e.key==="ArrowLeft") lbShow(cur-1); if(e.key==="ArrowRight") lbShow(cur+1); });
 </script>
 </body>
 </html>
