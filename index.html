@@ -163,6 +163,12 @@ footer{border-top:1px solid var(--line);background:var(--surface)}
 .modal .note.lead{text-align:left;margin:0 0 6px;font-size:.84rem}
 .link.inline{display:inline;margin:0;font-size:inherit}
 /* Views: team + gallery */
+.fadein{animation:fadein .9s ease both}
+@keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.drop button.current{color:#1f9d57;font-weight:700;background:rgba(31,157,87,.12);cursor:default;opacity:1}
+.drop button.current::after{content:" ✓"}
+[data-theme="dark"] .drop button.current{color:#4cd388;background:rgba(76,211,136,.14)}
+nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
 .title{cursor:pointer}
 .vhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .vhead small{font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.7rem;color:var(--accent)}
@@ -483,7 +489,13 @@ tick(); setInterval(tick,1000);
 /* ===== Views: SBI Team Structure + Team Gallery ===== */
 const VIEWS={"SBI Team Structure":"team","Team Gallery":"gallery"};
 function openUpdate(n){ VIEWS[n]?showView(VIEWS[n]):soon(n); closeMenus(); }
-function showView(v){ ["home","team","gallery"].forEach(k=>$("#view-"+k).hidden=k!==v); closeMenus(); window.scrollTo({top:0}); }
+function showView(v){
+  ["home","team","gallery"].forEach(k=>$("#view-"+k).hidden=k!==v);
+  const el=$("#view-"+v); el.classList.remove("fadein"); void el.offsetWidth; el.classList.add("fadein");
+  $$("#updatesDrop button").forEach(b=>{ const on=VIEWS[b.textContent]===v; b.classList.toggle("current",on); b.disabled=on; });
+  $("#updatesMenu .top").classList.toggle("here",v!=="home");
+  closeMenus(); window.scrollTo({top:0});
+}
 $(".title").onclick=()=>showView("home");
 
 const TIMG="image/team/";
