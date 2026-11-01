@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Society Brands</title>
 <link rel="icon" href="image/sbi.ico">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@500;700&family=Nunito:wght@400;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f3f5f1;--surface:#fff;--ink:#17302b;--muted:#5d726c;--line:#dbe3de;--brand:#1f6b5c;--brand-ink:#fff;--accent:#c9a45c;--soft:#e4efe9;--shadow:0 8px 28px rgba(23,48,43,.09)}
 [data-theme="dark"]{--bg:#12141a;--surface:#1a1d26;--ink:#eceef3;--muted:#a0a7b6;--line:#2c3140;--brand:#5cc2ad;--brand-ink:#0b1f1a;--accent:#d8b872;--soft:#242938;--shadow:0 8px 28px rgba(0,0,0,.4)}
@@ -224,6 +224,53 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
  .foot{justify-content:center;text-align:center}.foot .l{justify-content:center;text-align:center}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Sign-up form layout (modal size stays the same) */
+.modal{width:min(440px,100%)}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.r3>div,.r2>div{min-width:0}
+.modal select{width:100%;padding:7px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);font-size:.85rem}
+[data-mode="signup"] label{font-size:.68rem;margin:5px 0 1px}
+[data-mode="signup"] input,[data-mode="signup"] select{padding:6px 10px;font-size:.82rem}
+.modal input::placeholder{font-size:.74rem;opacity:.75}
+[data-theme="dark"] .modal input,[data-theme="dark"] .modal select{color-scheme:dark}
+.sfx{display:flex;align-items:stretch;border:1px solid var(--line);border-radius:10px;background:var(--bg);overflow:hidden}
+.sfx input{border:0!important;box-shadow:none!important;background:transparent;border-radius:0;flex:1;min-width:0}
+.sfx span{display:grid;place-items:center;padding:0 10px;background:var(--soft);color:var(--muted);font-size:.78rem;white-space:nowrap}
+.sfx:has(input.bad){border-color:#d64545;box-shadow:0 0 0 3px rgba(214,69,69,.15)}
+.modal select.bad{border-color:#d64545}
+.info{margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--soft);font-size:.78rem;color:var(--muted);line-height:1.5}
+.info b{display:block;color:var(--ink);margin-top:6px}.info b:first-child{margin-top:0}
+@media(max-width:480px){.r3{grid-template-columns:1fr 1fr}}
+/* v2 tweaks */
+.modal{width:min(520px,100%);--ph:color-mix(in srgb,var(--muted) 75%,transparent)}
+.modal input::placeholder{color:var(--ph);opacity:1;font-size:.74rem}
+[data-mode="signup"] input::placeholder{font-size:.72rem}
+.modal select.empty,.modal input[type=date].empty{color:var(--ph);font-size:.74rem}
+[data-mode="signup"] input,[data-mode="signup"] select{height:34px}
+.sfx input{height:32px!important}
+[data-mode="signup"] :is(label,input,select,.msg,.or,.sfx span){font-family:'Nunito',system-ui,sans-serif}
+[data-mode="signup"] select option{color:var(--ink)}
+@media(max-width:560px){.rn{grid-template-columns:1fr}}
+/* v3 */
+.drop button.has-tag{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cs{font-size:.6rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:4px;border:1px solid var(--accent);color:var(--accent);white-space:nowrap}
+.stat .plus{font-size:.6em;margin-left:6px;color:#0a7a3a;font-weight:800;vertical-align:super}
+@keyframes plus{50%{transform:scale(1.12)}}
+.modal input.match{border-color:#1f9d57!important;box-shadow:0 0 0 3px rgba(31,157,87,.18)}
+.msg{min-height:34px;display:flex;align-items:center;padding:6px 10px;border:1px solid transparent;border-radius:8px}
+.msg.err{background:rgba(214,69,69,.1);border-color:rgba(214,69,69,.35)}
+.msg.ok{background:rgba(31,157,87,.1);border-color:rgba(31,157,87,.35);color:#1f9d57}
+.msg.err::before{content:"⚠";margin-right:7px}.msg.ok::before{content:"✓";margin-right:7px}
+[data-theme="dark"] .msg.ok{color:#4cd388}
+/* v5 */
+.modal input.nomatch{border-color:#d64545!important;box-shadow:0 0 0 3px rgba(214,69,69,.15)}
+/* v4 */
+.drop button:disabled{cursor:not-allowed;opacity:.8;color:var(--muted)}
+.drop button:disabled:hover{background:none;color:var(--muted)}
+#toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:0;background:var(--brand);color:var(--brand-ink);font-size:1.3rem;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .3s,transform .3s,filter .2s;z-index:60}
+#toTop.show{opacity:1;transform:none;pointer-events:auto}
+#toTop:hover{filter:brightness(1.12);transform:translateY(-3px)}
 </style>
 </head>
 <body>
@@ -262,7 +309,7 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
       <div class="stat"><b>May 1, 2024</b><span>Where we started</span></div>
       <div class="stat"><b>10 → 30+</b><span>Team members</span></div>
       <div class="stat"><b>2 → 6</b><span>Major brands</span></div>
-      <div class="stat"><b>6</b><span>Brands we serve</span></div>
+      <div class="stat"><b>6<span class="plus" title="Another brand is coming soon">+1</span></b><span>Brands we serve · +1 coming soon</span></div>
     </div>
   </section>
 
@@ -316,8 +363,8 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
     </div>
     <div class="slider"><div class="slides" id="slides">
       <form class="slide" novalidate data-mode="login">
-        <label for="li-email">Email</label><input id="li-email" type="email" autocomplete="email">
-        <label for="li-pw">Password</label><input id="li-pw" type="password" autocomplete="current-password">
+        <label for="li-email">Username / Email</label><input id="li-email" data-f="user" placeholder="Enter your Username or username@societybrands.com" autocomplete="username" maxlength="60">
+        <label for="li-pw">Password</label><input id="li-pw" type="password" placeholder="Enter your password" autocomplete="current-password">
         <button class="btn" type="submit">Log in</button>
         <div class="or"><span>or</span></div><button type="button" class="gbtn" data-google><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>Sign in with Google</span></button>
         <button class="link" type="button" data-tab="2">Forgot your password?</button>
@@ -325,24 +372,58 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
         <p class="note">New here? <button class="link inline" type="button" data-tab="1">Create an account</button></p>
         <p class="note small">Need help? Contact your SBI team lead.</p>
       </form>
-      <form class="slide" novalidate data-mode="signup">
-        <label for="su-name">Full name</label><input id="su-name" autocomplete="name">
-        <label for="su-email">Email</label><input id="su-email" type="email" autocomplete="email">
-        <label for="su-pw">Password</label><input id="su-pw" type="password" autocomplete="new-password">
-        <label for="su-pw2">Confirm password</label><input id="su-pw2" type="password" autocomplete="new-password">
+      <form class="slide" novalidate data-mode="signup" autocomplete="off">
+        <div class="r2 rn">
+          <div><label for="su-fn">First name</label><input id="su-fn" data-f="first" placeholder="Enter your first name (letters only)" autocomplete="given-name" maxlength="12"></div>
+          <div><label for="su-ln">Last name</label><input id="su-ln" data-f="name" placeholder="Enter your last name (letters only)" autocomplete="family-name" maxlength="12"></div>
+        </div>
+        <label for="su-mn">Middle name</label><input id="su-mn" data-f="name" placeholder="Enter your middle name (letters only)" autocomplete="additional-name" maxlength="12">
+        <div class="r2">
+          <div><label for="su-bd">Birthdate</label><input id="su-bd" class="empty" type="date" autocomplete="bday"></div>
+          <div><label for="su-ge">Gender</label><select id="su-ge" class="empty"><option value="" selected disabled>Select gender</option><option>Male</option><option>Female</option><option>Prefer not to say</option></select></div>
+        </div>
+        <label for="su-user">Username</label>
+        <div class="sfx"><input id="su-user" data-f="user" placeholder="5–12 characters: a–z A–Z 0–9 ! @ _ . : *" autocomplete="username" maxlength="12"><span>@societybrands.com</span></div>
+        <div class="r2">
+          <div><label for="su-pw">Password</label><input id="su-pw" type="password" placeholder="5–15 letters &amp; numbers only" autocomplete="new-password" maxlength="15"></div>
+          <div><label for="su-pw2">Confirm password</label><input id="su-pw2" type="password" placeholder="Re-enter your password (5–15)" autocomplete="new-password" maxlength="15"></div>
+        </div>
         <button class="btn" type="submit">Create account</button>
         <div class="or"><span>or</span></div><button type="button" class="gbtn" data-google><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2 1.4-4.8 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg><span>Sign up with Google</span></button>
         <div class="msg" role="status"></div>
       </form>
       <form class="slide" novalidate data-mode="forgot">
         <p class="note lead">Enter the email linked to your account and we'll send you a link to reset your password.</p>
-        <label for="fp-email">Email</label><input id="fp-email" type="email" autocomplete="email">
+        <label for="fp-email">Email</label><input id="fp-email" data-f="user" placeholder="username@societybrands.com" autocomplete="email" maxlength="60">
         <button class="btn" type="submit">Send reset link</button>
         <div class="msg" role="status"></div>
         <p class="note small">Didn't get the email? Check your spam folder, or try again in a few minutes.</p>
         <p class="note">Remembered it? <button class="link inline" type="button" data-tab="0">Back to log in</button></p>
       </form>
     </div></div>
+  </div>
+</div>
+
+<button id="toTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<!-- Staff code modal -->
+<div class="overlay" id="staffOv" role="dialog" aria-modal="true" aria-labelledby="staffT">
+  <div class="modal">
+    <button class="x" data-close aria-label="Close">×</button>
+    <h3 id="staffT">Please enter your staff code</h3>
+    <p>Enter your staff code to finish creating your account.</p>
+    <form id="staffForm" novalidate>
+      <label for="sc">Staff code</label>
+      <input id="sc" placeholder="10 capital letters &amp; numbers (e.g. AB12CD34EF)" autocomplete="off" maxlength="10">
+      <div class="msg" role="status"></div>
+      <button class="btn" type="submit" style="margin-top:6px">Verify and create account</button>
+      <button class="link" type="button" id="staffBack">← Back to sign up</button>
+    </form>
+    <div class="info">
+      <b>Where do I get my staff code?</b>Your administrator gives it to you. If you don't have one yet, ask your team lead or the SBI administrator.
+      <b>Why is it needed?</b>It confirms you are an authorized Society Brands / SixEleven team member, keeps unauthorized people from signing up, and links your account to the right team.
+      <b>Keep it private.</b>Please don't share your code. If it doesn't work, contact your administrator.
+    </div>
   </div>
 </div>
 
@@ -353,7 +434,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 
 /* Coming soon modal */
 function soon(name){ $("#soonT").textContent=name; $("#soonP").textContent="This feature will be coming soon..."; $("#soonOv").classList.add("open"); closeMenus(); }
-function fill(el,items,fn=soon){ items.forEach(n=>{const b=document.createElement("button");b.textContent=n;b.onclick=()=>fn(n);el.appendChild(b);}); }
+function fill(el,items,fn=soon){ items.forEach(n=>{const b=document.createElement("button");b.textContent=n; if(n==="PureCaps"){ b.classList.add("has-tag"); b.innerHTML=n+'<span class="cs">Coming soon</span>'; } if(n==="PureCaps"){ b.disabled=true; b.title="Coming soon"; } else b.onclick=()=>fn(n); el.appendChild(b);}); }
 fill($("#brandsDrop"),BRANDS); fill($("#updatesDrop"),UPDATES,openUpdate);
 $$("[data-soon]").forEach(b=>b.onclick=()=>soon(b.dataset.soon));
 
@@ -379,46 +460,125 @@ function setTab(i){
 }
 $$("[data-tab]").forEach(b=>b.addEventListener("click",()=>setTab(b.dataset.tab)));
 $("#signin").onclick=()=>{ setTab(0); $("#authOv").classList.add("open"); $("#li-email").focus(); };
-const say=(f,t,ok)=>{ const m=f.querySelector(".msg"); m.textContent=t; m.className="msg "+(ok?"ok":"err"); };
+const say=(f,t,ok)=>{ const m=f.querySelector(".msg"); m.textContent=t; m.className="msg "+(ok?"ok":"err"); try{ m.scrollIntoView({block:"nearest",behavior:"smooth"}); }catch(e){} };
 const bad=(...els)=>els.forEach(el=>el.classList.add("bad"));
-$$(".modal input").forEach(i=>i.addEventListener("input",()=>i.classList.remove("bad")));
-$$("[data-google]").forEach(b=>b.onclick=()=>say(b.closest("form"),"Google sign-in needs a Google client ID (demo).",false));
+$$(".modal input,.modal select").forEach(i=>["input","change"].forEach(ev=>i.addEventListener(ev,()=>i.classList.remove("bad"))));
 
-/* Demo accounts kept in this browser only (passwords are hashed). A real site needs a server. */
+/* Input rules: names = letters only + auto capital; username = a-z A-Z 0-9 ! @ _ . : * */
+function clean(i,re,cap){
+  const pos=i.selectionStart, old=i.value; let v=old.replace(re,"");
+  if(cap&&v) v=v[0].toUpperCase()+v.slice(1);
+  if(v!==old){ const n=old.slice(0,pos).replace(re,"").length; i.value=v; try{i.setSelectionRange(n,n);}catch(e){} }
+}
+function cleanName(i,space){
+  const pos=i.selectionStart; let v=i.value.replace(space?/[^A-Za-z ]/g:/[^A-Za-z]/g,"");
+  if(space){ v=v.replace(/^ +/,""); const k=v.indexOf(" "); if(k>=0) v=v.slice(0,k+1)+v.slice(k+1).replace(/ /g,""); }
+  v=v.replace(/^[a-z]/,c=>c.toUpperCase()); if(space) v=v.replace(/ [a-z]/,c=>c.toUpperCase());
+  if(v!==i.value){ i.value=v; const n=Math.min(pos,v.length); try{i.setSelectionRange(n,n);}catch(e){} }
+}
+$$('[data-f="name"]').forEach(i=>i.addEventListener("input",()=>cleanName(i,false)));
+$$('[data-f="first"]').forEach(i=>i.addEventListener("input",()=>cleanName(i,true)));
+const syncEmpty=()=>["#su-bd","#su-ge"].forEach(id=>$(id).classList.toggle("empty",!$(id).value));
+["#su-bd","#su-ge"].forEach(id=>["input","change"].forEach(ev=>$(id).addEventListener(ev,syncEmpty)));
+$$('[data-f="user"]').forEach(i=>i.addEventListener("input",()=>clean(i,/[^A-Za-z0-9!@_.:*]/g,false)));
+const DOMAIN="@societybrands.com";
+const normUser=v=>{ v=v.trim().toLowerCase(); return v.endsWith(DOMAIN)?v.slice(0,-DOMAIN.length):v; };
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+$("#su-bd").max=new Date().toISOString().slice(0,10);
+
+/* Demo accounts kept in this browser only (passwords are hashed). Replace with Firebase later. */
 let mem={}; const store={ get(){ try{ return JSON.parse(localStorage.getItem("sb-users")||"{}"); }catch(e){ return mem; } }, set(u){ mem=u; try{ localStorage.setItem("sb-users",JSON.stringify(u)); }catch(e){} } };
 async function hash(t){ try{ const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }catch(e){ return btoa(unescape(encodeURIComponent(t))); } }
-const EMAIL=/^\S+@\S+\.\S+$/;
+
+/* Green outline when the two passwords match */
+const pwA=$("#su-pw"), pwB=$("#su-pw2");
+function pwMatch(){ const a=pwA.value, b=pwB.value, ok=a&&a===b, no=b&&a!==b; [pwA,pwB].forEach(i=>{ i.classList.toggle("match",!!ok); i.classList.toggle("nomatch",!!no); if(ok) i.classList.remove("bad"); }); }
+[pwA,pwB].forEach(i=>i.addEventListener("input",()=>clean(i,/[^A-Za-z0-9]/g,false)));
+pwA.addEventListener("input",pwMatch); pwB.addEventListener("input",pwMatch);
+
+/* Sign-up: validate all fields, return the data (or null after showing an error) */
+async function readSignup(f){
+  $$("#slides .bad").forEach(i=>i.classList.remove("bad"));
+  const g=id=>f.querySelector(id), fn=g("#su-fn"), mn=g("#su-mn"), ln=g("#su-ln"), bd=g("#su-bd"), ge=g("#su-ge"), us=g("#su-user"), pw=g("#su-pw"), pw2=g("#su-pw2");
+  const err=(el,t)=>{ bad(el); say(f,t); return null; };
+  fn.value=fn.value.trim();
+  if(fn.value.length<3||fn.value.length>12) return err(fn,"First name must be 3–12 letters.");
+  if(ln.value.length<3||ln.value.length>12) return err(ln,"Last name must be 3–12 letters.");
+  if(mn.value&&(mn.value.length<3||mn.value.length>12)) return err(mn,"Middle name must be 3–12 letters.");
+  if(!bd.value) return err(bd,"Please select your birthdate.");
+  if(new Date(bd.value)>new Date()) return err(bd,"Birthdate can't be in the future.");
+  if(!ge.value) return err(ge,"Please select your gender.");
+  const key=normUser(us.value);
+  if(key.length<5||key.length>12) return err(us,"Username must be 5–12 characters.");
+  if(!/^[A-Za-z0-9]{5,15}$/.test(pw.value)) return err(pw,"Password must be 5–15 letters and numbers only.");
+  if(pw.value!==pw2.value) return err(pw2,"Passwords do not match.");
+  if(store.get()[key]) return err(us,"That username is already taken.");
+  return {first:fn.value,middle:mn.value,last:ln.value,birth:bd.value,gender:ge.value,key,hash:await hash(pw.value)};
+}
+
+/* Staff code step */
+let pending=null; const sc=$("#sc"), staffMsg=$("#staffForm .msg");
+sc.addEventListener("input",()=>{ sc.value=sc.value.toUpperCase().replace(/[^A-Z0-9]/g,""); sc.classList.remove("bad"); });
+function startStaff(d){ pending=d; $("#authOv").classList.remove("open"); staffMsg.textContent=""; staffMsg.className="msg"; sc.value=""; $("#staffOv").classList.add("open"); sc.focus(); }
+$("#staffBack").onclick=()=>{ $("#staffOv").classList.remove("open"); $("#authOv").classList.add("open"); };
+/* ===== Firebase hooks: the real data will be added soon ===== */
+const FIREBASE_DEMO=true;            // set to false once Firebase is connected
+const DEMO_CODES=["SBI2026DEM"];     // demo only: remove when staff codes live in Firebase
+async function fbVerifyGoogle(){
+  if(FIREBASE_DEMO){ await sleep(900); return {ok:true}; }
+  /* TODO (Firebase): signInWithPopup(auth,new GoogleAuthProvider()), then check the account exists in your allowed accounts. */
+  return {ok:false,reason:"This Google account was not recognized."};
+}
+async function fbCheckStaffCode(code){
+  if(FIREBASE_DEMO){ await sleep(700); return DEMO_CODES.includes(code)?{ok:true}:{ok:false,reason:"Staff code not recognized. Ask your administrator."}; }
+  /* TODO (Firebase): look the code up (e.g. Firestore "staffCodes/"+code) and mark it as used. */
+  return {ok:false,reason:"Staff code not recognized. Ask your administrator."};
+}
+const staffErr=t=>{ sc.classList.add("bad"); staffMsg.textContent=t; staffMsg.className="msg err"; };
+$("#staffForm").onsubmit=async e=>{
+  e.preventDefault(); const btn=e.target.querySelector(".btn"); sc.classList.remove("bad");
+  if(!sc.value) return staffErr("Please enter your staff code.");
+  if(!/^[A-Z0-9]{10}$/.test(sc.value)) return staffErr("Staff code must be 10 capital letters and numbers.");
+  btn.disabled=true; staffMsg.textContent="Checking your staff code…"; staffMsg.className="msg ok";
+  const res=await fbCheckStaffCode(sc.value); btn.disabled=false;
+  if(!res.ok) return staffErr(res.reason);
+  const d=pending, google=d.provider==="google";
+  if(!google){ const users=store.get(); users[d.key]={first:d.first,middle:d.middle,last:d.last,birth:d.birth,gender:d.gender,hash:d.hash,provider:d.provider,staff:sc.value}; store.set(users); }
+  staffMsg.textContent="Staff code accepted! Your account is ready."; staffMsg.className="msg ok";
+  setTimeout(()=>{
+    $("#staffOv").classList.remove("open"); forms[1].reset(); syncEmpty(); pwMatch();
+    /* TODO: once Firebase is linked, send them to the home page: location.href="home.html"; */
+    soon("Home page");
+  },1200);
+};
+
+/* Google buttons */
+$$("[data-google]").forEach(b=>b.onclick=async()=>{
+  const f=b.closest("form");
+  if(f.dataset.mode!=="signup") return say(f,"Google sign-in needs a Google client ID (demo).",false);
+  $$("#slides .bad").forEach(i=>i.classList.remove("bad"));
+  say(f,"Verifying your Google account…",true);
+  const res=await fbVerifyGoogle(); if(!res.ok) return say(f,res.reason,false);
+  startStaff({provider:"google"});
+});
 
 forms.forEach(f=>f.onsubmit=async e=>{
   e.preventDefault(); $$("#slides .bad").forEach(i=>i.classList.remove("bad"));
   const mode=f.dataset.mode, q=id=>f.querySelector(id), users=store.get();
+  if(mode==="signup"){ const d=await readSignup(f); if(!d) return; d.provider="password"; return startStaff(d); }
   if(mode==="login"){
-    const em=q("#li-email"), pw=q("#li-pw"), key=em.value.trim().toLowerCase();
-    if(!em.value.trim()&&!pw.value){ bad(em,pw); return say(f,"Please enter your email and password."); }
-    if(!em.value.trim()){ bad(em); return say(f,"Please enter your email."); }
-    if(!EMAIL.test(key)){ bad(em); return say(f,"Enter a valid email address."); }
+    const em=q("#li-email"), pw=q("#li-pw"), key=normUser(em.value);
+    if(!key&&!pw.value){ bad(em,pw); return say(f,"Please enter your username/email and password."); }
+    if(!key){ bad(em); return say(f,"Please enter your username or email."); }
     if(!pw.value){ bad(pw); return say(f,"Please enter your password."); }
-    if(!users[key]){ bad(em); return say(f,"No account found with this email."); }
+    if(!users[key]){ bad(em); return say(f,"No account found with this username."); }
     if(users[key].hash!==await hash(pw.value)){ bad(pw); return say(f,"Incorrect password. Please try again."); }
-    return say(f,"Welcome back, "+users[key].name.split(" ")[0]+"!",true);
+    return say(f,"Welcome back, "+(users[key].first||key)+"!",true);
   }
-  if(mode==="signup"){
-    const nm=q("#su-name"), em=q("#su-email"), pw=q("#su-pw"), pw2=q("#su-pw2"), key=em.value.trim().toLowerCase();
-    if(!nm.value.trim()){ bad(nm); return say(f,"Please enter your full name."); }
-    if(!em.value.trim()){ bad(em); return say(f,"Please enter your email."); }
-    if(!EMAIL.test(key)){ bad(em); return say(f,"Enter a valid email address."); }
-    if(pw.value.length<8){ bad(pw); return say(f,"Password must be at least 8 characters."); }
-    if(pw.value!==pw2.value){ bad(pw2); return say(f,"Passwords do not match."); }
-    if(users[key]){ bad(em); return say(f,"An account with this email already exists."); }
-    users[key]={name:nm.value.trim(),hash:await hash(pw.value)}; store.set(users);
-    say(f,"Account created! Taking you to log in…",true);
-    setTimeout(()=>{ setTab(0); $("#li-email").value=key; $("#li-pw").value=""; $("#li-pw").focus(); },1400);
-    return;
-  }
-  const em=q("#fp-email"), key=em.value.trim().toLowerCase();
+  const em=q("#fp-email"), key=normUser(em.value);
   if(!em.value.trim()){ bad(em); return say(f,"Please enter your email."); }
-  if(!EMAIL.test(key)){ bad(em); return say(f,"Enter a valid email address."); }
-  if(!users[key]){ bad(em); return say(f,"No account found with this email."); }
+  if(!em.value.trim().toLowerCase().endsWith(DOMAIN)||key.length<5){ bad(em); return say(f,"Use your username@societybrands.com email."); }
+  if(!users[key]){ bad(em); return say(f,"No account found with this username."); }
   say(f,"Reset link sent! Check your inbox.",true);
 });
 setTab(0);
@@ -496,6 +656,10 @@ const flip=()=>{ if(busy) return; busy=true; $("#clock").classList.add("dim");
 $("#clock").onclick=flip;
 $("#clock").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); flip(); } });
 tick(); setInterval(tick,1000);
+
+/* Back to top */
+const toTop=$("#toTop"); addEventListener("scroll",()=>toTop.classList.toggle("show",scrollY>300),{passive:true});
+toTop.onclick=()=>scrollTo({top:0,behavior:"smooth"});
 
 /* ===== Views: SBI Team Structure + Team Gallery ===== */
 const VIEWS={"SBI Team Structure":"team","Team Gallery":"gallery"};
