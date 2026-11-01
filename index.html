@@ -24,6 +24,11 @@ header{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:
 .clock{text-align:right;font-family:'JetBrains Mono',ui-monospace,Consolas,monospace;color:var(--ink);padding:4px 10px;border:1px solid var(--line);border-radius:6px;background:transparent;line-height:1.25}
 .ck-top{font:600 .52rem Manrope,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .live{display:none}
+.clock{cursor:pointer;transition:border-color .2s}
+.clock:hover{border-color:var(--brand)}
+.clock .ck-top,.clock .ck-time,.clock .ck-date{transition:opacity .45s ease,transform .45s ease}
+.clock.dim .ck-top,.clock.dim .ck-time,.clock.dim .ck-date{opacity:0;transform:translateY(-4px)}
+.sw{color:var(--brand);font-size:.7rem}
 .ck-time{font-size:.9rem;font-weight:700}
 .ck-date{font-size:.66rem;font-weight:500;color:var(--muted)}
 .clock small{display:block;font-size:.68rem;font-weight:500;color:var(--muted);line-height:1.2}
@@ -277,10 +282,10 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
 <footer>
   <div class="foot">
     <div class="l"><a class="copy" href="https://bryangablao.github.io/Accxs-Creations/" target="_blank" rel="noopener noreferrer">© Accxs Creations 2026</a>
-      <button class="flink" data-soon="Privacy Policy">Privacy Policy</button>
-      <button class="flink" data-soon="Terms of Service">Terms of Service</button></div>
-    <div class="clock" id="clock" aria-label="Philippine Standard Time">
-      <div class="ck-top"><span class="live"></span>Philippine Standard Time</div>
+      <a class="flink" href="privacypolicy.html">Privacy Policy</a>
+      <a class="flink" href="termsofservice.html">Terms of Service</a></div>
+    <div class="clock" id="clock" role="button" tabindex="0" title="Click to switch time zone">
+      <div class="ck-top"><span class="live"></span><span id="ckLabel">Philippine Standard Time</span> <span class="sw">⇄</span></div>
       <div class="ck-time" id="ckTime">--:--:--</div>
       <div class="ck-date" id="ckDate">--/--/---- | (---)</div>
     </div>
@@ -439,8 +444,8 @@ function buildIndex(){
     ...ALLPEOPLE.map(n=>({n,t:"Team member",k:"",run:()=>showView("team")})),
     sec("intro","Society Brands / SixEleven Team"), sec("promise","Our Promise"), sec("mission","Our Mission"), sec("service","Service That Makes a Meaningful Difference"),
     ...LOGOS.map(f=>({n:f.replace(/\.[^.]+$/,""),t:"Tools & partners",k:"",run:go("partners")})),
-    {n:"Privacy Policy",t:"Footer",k:"",run:()=>soon("Privacy Policy")},
-    {n:"Terms of Service",t:"Footer",k:"",run:()=>soon("Terms of Service")}
+    {n:"Privacy Policy",t:"Footer",k:"",run:()=>{location.href="privacypolicy.html"}},
+    {n:"Terms of Service",t:"Footer",k:"",run:()=>{location.href="termsofservice.html"}}
   ];
 }
 function esc(t){return t.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
@@ -477,13 +482,19 @@ function logoItem(f){const n=f.replace(/\.[^.]+$/,"");return '<div class="item">
 $("#track").innerHTML=LOGOS.map(logoItem).join("").repeat(2);
 
 /* Philippine Standard Time */
+const ZONES=[{tz:"Asia/Manila",label:"Philippine Standard Time"},{tz:"America/Los_Angeles",label:"Pacific Time (US & Canada)"}];
+let zi=0;
 function tick(){
-  const d=new Date(), tz={timeZone:"Asia/Manila"};
-  const time=d.toLocaleTimeString("en-US",{...tz,hour12:true,hour:"2-digit",minute:"2-digit",second:"2-digit"});
-  const date=d.toLocaleDateString("en-US",{...tz,month:"2-digit",day:"2-digit",year:"numeric"});
-  const day=d.toLocaleDateString("en-US",{...tz,weekday:"long"});
-  $("#ckTime").textContent=time; $("#ckDate").textContent=date+" | ("+day+")";
+  const d=new Date(), z=ZONES[zi], tz={timeZone:z.tz};
+  $("#ckLabel").textContent=z.label;
+  $("#ckTime").textContent=d.toLocaleTimeString("en-US",{...tz,hour12:true,hour:"2-digit",minute:"2-digit",second:"2-digit"});
+  $("#ckDate").textContent=d.toLocaleDateString("en-US",{...tz,month:"2-digit",day:"2-digit",year:"numeric"})+" | ("+d.toLocaleDateString("en-US",{...tz,weekday:"long"})+")";
 }
+let busy=false;
+const flip=()=>{ if(busy) return; busy=true; $("#clock").classList.add("dim");
+  setTimeout(()=>{ zi=(zi+1)%ZONES.length; tick(); $("#clock").classList.remove("dim"); setTimeout(()=>busy=false,450); },450); };
+$("#clock").onclick=flip;
+$("#clock").addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); flip(); } });
 tick(); setInterval(tick,1000);
 
 /* ===== Views: SBI Team Structure + Team Gallery ===== */
