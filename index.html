@@ -271,6 +271,131 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
 #toTop{position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;border:0;background:var(--brand);color:var(--brand-ink);font-size:1.3rem;font-weight:800;box-shadow:0 8px 22px rgba(0,0,0,.28);opacity:0;transform:translateY(14px);pointer-events:none;transition:opacity .3s,transform .3s,filter .2s;z-index:60}
 #toTop.show{opacity:1;transform:none;pointer-events:auto}
 #toTop:hover{filter:brightness(1.12);transform:translateY(-3px)}
+/* v6: Operational SOPs + Top Performers */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+.intro{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(135deg,var(--soft),var(--surface));border:1px solid var(--line);border-radius:20px;padding:20px 22px;margin-bottom:22px;box-shadow:var(--shadow)}
+.intro .ib{flex:none;width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:var(--brand);color:var(--brand-ink)}
+.intro svg,.ib svg{width:24px;height:24px}
+.intro p{color:var(--muted);text-align:justify}
+.sstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:30px}
+.sstat{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;transition:transform .25s,box-shadow .25s}
+.sstat:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.sstat .ib{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:var(--c,var(--brand));color:#fff;flex:none}
+.sstat .ib svg{width:22px;height:22px}
+.sstat b{display:block;font-family:Newsreader,Georgia,serif;font-size:1.5rem;line-height:1.1}
+.sstat span{font-size:.8rem;color:var(--muted)}
+.sop{--c:var(--brand);margin-bottom:36px}
+.sop-h{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px}
+.sop-h .ib{flex:none;width:54px;height:54px;border-radius:16px;display:grid;place-items:center;background:var(--c);color:#fff;box-shadow:0 8px 18px color-mix(in srgb,var(--c) 45%,transparent)}
+.sop-h h3{font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.sop-h h3 em{font-style:normal;margin-left:8px;background:var(--c);color:#fff;border-radius:999px;padding:1px 10px;font-size:.74rem;letter-spacing:0}
+.sop-h p{color:var(--muted);font-size:.92rem;text-align:justify;margin-top:2px}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.sm2{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:14px;padding:12px 14px}
+.sm2.in:hover{transform:translateY(-4px);box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+.sm2 b{display:block;font-size:.9rem;line-height:1.3}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.rc{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:999px}
+.rc svg{width:12px;height:12px}
+.rc.ch{color:var(--brand);background:var(--soft)}
+.rc.ld{color:#9a6b00;background:rgba(211,154,44,.16)}
+.rc.op{color:#3a67c9;background:rgba(91,141,239,.14)}
+[data-theme="dark"] .rc.ld{color:#e9c26a}[data-theme="dark"] .rc.op{color:#8fb1f5}
+.tl{position:relative;padding-left:40px}
+.tl::before{content:"";position:absolute;left:15px;top:8px;bottom:8px;width:3px;border-radius:3px;background:linear-gradient(var(--accent),var(--line))}
+.tc{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px 22px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.tc.in:hover{transform:translateY(-4px);transition:transform .25s}
+.tc::before{content:"";position:absolute;left:-33px;top:26px;width:15px;height:15px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg),0 0 0 6px var(--accent)}
+.tc.latest{background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 22%,var(--surface)),var(--surface) 60%);border-color:var(--accent);overflow:hidden}
+.tc.latest::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:sheen 4s ease-in-out infinite}
+@keyframes sheen{0%,60%{left:-60%}100%{left:140%}}
+.tc-h{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.tc-h .ib{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--accent);color:#2a2008}
+.tc-h .ib svg{width:24px;height:24px}
+.tc.latest .ib svg{animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px) rotate(-6deg)}}
+.tc-h h3{font-family:Newsreader,Georgia,serif;font-size:1.3rem;line-height:1.2}
+.tag2{margin-left:auto;font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#2a2008;background:var(--accent);border-radius:999px;padding:2px 12px}
+.tc>p{color:var(--muted);font-size:.93rem;text-align:justify;margin-bottom:14px}
+.hon{display:flex;flex-wrap:wrap;gap:10px}
+.hn{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:5px 16px 5px 6px;font-weight:700;font-size:.88rem;transition:transform .2s,border-color .2s}
+.hn:hover{transform:scale(1.04);border-color:var(--accent)}
+.hn svg{width:15px;height:15px;color:var(--accent);fill:var(--accent)}
+.most b{font-size:1rem!important;font-family:Manrope,sans-serif!important}
+@media(max-width:560px){.tl{padding-left:30px}.tc::before{left:-27px}.sop-h{flex-direction:column}}
+/* v7: richer team sections */
+.sop-b{position:relative;overflow:hidden;border-radius:22px;padding:24px 26px;color:#fff;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 55%,#000));box-shadow:0 14px 30px color-mix(in srgb,var(--c) 35%,transparent);margin-bottom:16px}
+.sop-b .wm{position:absolute;right:-14px;bottom:-30px;width:190px;height:190px;opacity:.14;animation:float 6s ease-in-out infinite}
+.sop-b .wm svg{width:100%;height:100%;stroke-width:1.2}
+@keyframes float{50%{transform:translateY(-10px) rotate(4deg)}}
+.sop-b h3{position:relative;display:flex;align-items:center;gap:12px;font-family:Newsreader,Georgia,serif;font-size:1.7rem;margin-bottom:8px;color:#fff}
+.sop-b h3 svg{width:30px;height:30px}
+.sop-b p{position:relative;max-width:80ch;color:rgba(255,255,255,.93);font-size:.93rem;text-align:justify}
+.pills{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.2);border-radius:999px;padding:4px 13px;font-size:.78rem;font-weight:700}
+.pill svg{width:14px;height:14px}
+.lead{position:relative;display:flex;align-items:center;gap:12px;margin-top:14px;font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.stack{display:flex}
+.stack .av{margin-left:-10px;border:2px solid #fff}.stack .av:first-child{margin-left:0}
+.av.xs{width:36px;height:36px;font-size:.72rem}
+.cov{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 20px 12px;margin-bottom:16px}
+.cov h4{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.cv{display:grid;grid-template-columns:170px 1fr 30px;align-items:center;gap:12px;margin:7px 0;font-size:.82rem;font-weight:700}
+.cv .lb{display:flex;align-items:center;gap:7px}.cv .lb svg{width:15px;height:15px;color:var(--c)}
+.cv .tr{height:9px;border-radius:99px;background:var(--soft);overflow:hidden}
+.cv .tr i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 50%,#fff));transition:width 1.3s cubic-bezier(.4,0,.2,1) .3s}
+.cov.in .tr i{width:var(--w)}
+.cv>span:last-child{text-align:right;color:var(--c)}
+.mpg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.mp{text-align:center;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 14%,var(--surface)),var(--surface) 60%);border:1px solid color-mix(in srgb,var(--c) 30%,var(--line));border-radius:20px;padding:22px 14px 18px;box-shadow:var(--shadow)}
+.mp.in:hover{transform:translateY(-6px);transition:transform .25s}
+.mp h4{margin:14px 0 6px;font-size:.98rem;line-height:1.3}
+.sop .av.big{box-shadow:0 0 0 4px var(--surface),0 0 0 6px var(--c)}
+@media(max-width:560px){.cv{grid-template-columns:110px 1fr 26px}}
+/* v8: SOP hero/rings + brand pages */
+@property --p{syntax:"<number>";inherits:false;initial-value:0}
+.sm2[hidden],.mp[hidden],.pc[hidden]{display:none!important}
+.shero{position:relative;overflow:hidden;display:grid;grid-template-columns:1.3fr 1fr;gap:22px;background:linear-gradient(135deg,var(--brand),#2c8fb0);color:var(--brand-ink);border-radius:24px;padding:26px 28px;margin-bottom:22px;box-shadow:var(--shadow)}
+.shero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12);animation:float 7s ease-in-out infinite}
+.shl{display:flex;gap:16px;position:relative;z-index:1}
+.shl .ib{flex:none;width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:rgba(255,255,255,.24)}
+.shl .ib svg{width:26px;height:26px}
+.shl h3{font-family:Newsreader,Georgia,serif;font-size:1.55rem;margin-bottom:4px}
+.shl p{opacity:.94;text-align:justify;font-size:.93rem}
+.shr{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.shr input{width:100%;padding:11px 18px;border-radius:999px;border:0;background:rgba(255,255,255,.92);color:#17302b}
+.jump{display:flex;flex-wrap:wrap;gap:8px}
+.jump button{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;padding:7px 14px;font-weight:700;font-size:.82rem;background:rgba(255,255,255,.22);color:inherit;transition:background .2s,transform .2s}
+.jump button:hover{background:rgba(255,255,255,.4);transform:translateY(-2px)}
+.jump svg{width:15px;height:15px}.jump b{background:rgba(255,255,255,.3);border-radius:999px;padding:0 8px}
+.shr small{font-weight:700;min-height:1em}
+.rings{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:32px}
+.rt{display:flex;align-items:center;gap:18px;background:linear-gradient(135deg,color-mix(in srgb,var(--c) 13%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--c) 30%,var(--line));border-radius:22px;padding:18px 22px;box-shadow:var(--shadow)}
+.rt.in:hover{transform:translateY(-5px);transition:transform .25s}
+.ring{--p:0;flex:none;width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--soft) 0);transition:--p 1.6s cubic-bezier(.4,0,.2,1) .3s}
+.rt.in .ring{--p:var(--pp)}
+.rc2{width:66px;height:66px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:var(--c)}
+.rc2 svg{width:28px;height:28px}
+.rtx b{display:block;font-family:Newsreader,Georgia,serif;font-size:2.4rem;line-height:1;color:var(--c)}
+.rtx span{display:block;font-weight:700;font-size:.9rem}
+.rtx em{font-style:normal;font-size:.76rem;color:var(--muted)}
+.bn{position:relative;overflow:hidden;border-radius:24px;padding:28px 30px;color:#fff;background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 50%,#000));box-shadow:0 16px 34px color-mix(in srgb,var(--c) 35%,transparent);margin-bottom:26px}
+.bn .wm{position:absolute;right:-20px;bottom:-40px;width:230px;height:230px;opacity:.14;animation:float 6s ease-in-out infinite}
+.bn .wm svg{width:100%;height:100%;stroke-width:1.2}
+.bn small{position:relative;font-weight:800;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;opacity:.9}
+.bn h3{position:relative;font-family:Newsreader,Georgia,serif;font-size:clamp(1.7rem,4vw,2.4rem);margin:4px 0 10px;color:#fff}
+.bn p{position:relative;max-width:88ch;text-align:justify;color:rgba(255,255,255,.95)}
+.ph-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.ph-head h3{display:flex;align-items:center;gap:10px;font-size:.95rem;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.ph-head h3 em{font-style:normal;background:var(--c);color:#fff;border-radius:999px;padding:1px 11px;font-size:.78rem;letter-spacing:0}
+.bq{padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--surface);width:min(300px,100%)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.pc{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:12px;padding:10px 14px;font-size:.85rem;font-weight:600;line-height:1.35}
+.pc i{flex:none;min-width:32px;height:32px;padding:0 4px;border-radius:9px;display:grid;place-items:center;font-style:normal;font-size:.7rem;font-weight:800;color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.pc.in:hover{transform:translateX(4px);border-color:var(--c);transition:transform .2s,border-color .2s}
+.noprod{color:var(--muted);padding:14px}
+@media(max-width:760px){.shero{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -324,6 +449,9 @@ nav .top.here{color:#1f9d57}[data-theme="dark"] nav .top.here{color:#4cd388}
 </div>
   <div id="view-team" class="view" hidden></div>
   <div id="view-gallery" class="view" hidden></div>
+  <div id="view-sops" class="view" hidden></div>
+  <div id="view-top" class="view" hidden></div>
+  <div id="view-brand" class="view" hidden></div>
 </main>
 
 <footer>
@@ -435,7 +563,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 /* Coming soon modal */
 function soon(name){ $("#soonT").textContent=name; $("#soonP").textContent="This feature will be coming soon..."; $("#soonOv").classList.add("open"); closeMenus(); }
 function fill(el,items,fn=soon){ items.forEach(n=>{const b=document.createElement("button");b.textContent=n; if(n==="PureCaps"){ b.classList.add("has-tag"); b.innerHTML=n+'<span class="cs">Coming soon</span>'; } if(n==="PureCaps"){ b.disabled=true; b.title="Coming soon"; } else b.onclick=()=>fn(n); el.appendChild(b);}); }
-fill($("#brandsDrop"),BRANDS); fill($("#updatesDrop"),UPDATES,openUpdate);
+fill($("#brandsDrop"),BRANDS,openBrand); fill($("#updatesDrop"),UPDATES,openUpdate);
 $$("[data-soon]").forEach(b=>b.onclick=()=>soon(b.dataset.soon));
 
 /* Dropdowns */
@@ -486,6 +614,7 @@ const normUser=v=>{ v=v.trim().toLowerCase(); return v.endsWith(DOMAIN)?v.slice(
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 $("#su-bd").max=new Date().toISOString().slice(0,10);
 
+const setSession=(key,name)=>{ try{ localStorage.setItem("sb-session",JSON.stringify({key,name})); }catch(e){} };
 /* Demo accounts kept in this browser only (passwords are hashed). Replace with Firebase later. */
 let mem={}; const store={ get(){ try{ return JSON.parse(localStorage.getItem("sb-users")||"{}"); }catch(e){ return mem; } }, set(u){ mem=u; try{ localStorage.setItem("sb-users",JSON.stringify(u)); }catch(e){} } };
 async function hash(t){ try{ const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t)); return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join(""); }catch(e){ return btoa(unescape(encodeURIComponent(t))); } }
@@ -544,11 +673,10 @@ $("#staffForm").onsubmit=async e=>{
   if(!res.ok) return staffErr(res.reason);
   const d=pending, google=d.provider==="google";
   if(!google){ const users=store.get(); users[d.key]={first:d.first,middle:d.middle,last:d.last,birth:d.birth,gender:d.gender,hash:d.hash,provider:d.provider,staff:sc.value}; store.set(users); }
-  staffMsg.textContent="Staff code accepted! Your account is ready."; staffMsg.className="msg ok";
+  staffMsg.textContent="Staff code accepted! Taking you to home…"; staffMsg.className="msg ok";
   setTimeout(()=>{
     $("#staffOv").classList.remove("open"); forms[1].reset(); syncEmpty(); pwMatch();
-    /* TODO: once Firebase is linked, send them to the home page: location.href="home.html"; */
-    soon("Home page");
+    setSession(d.key||"google-user",d.first||"Team member"); location.href="home.html";
   },1200);
 };
 
@@ -573,7 +701,8 @@ forms.forEach(f=>f.onsubmit=async e=>{
     if(!pw.value){ bad(pw); return say(f,"Please enter your password."); }
     if(!users[key]){ bad(em); return say(f,"No account found with this username."); }
     if(users[key].hash!==await hash(pw.value)){ bad(pw); return say(f,"Incorrect password. Please try again."); }
-    return say(f,"Welcome back, "+(users[key].first||key)+"!",true);
+    const nm=users[key].first||key; setSession(key,nm); say(f,"Welcome back, "+nm+"! Taking you to home…",true);
+    setTimeout(()=>{ location.href="home.html"; },1000); return;
   }
   const em=q("#fp-email"), key=normUser(em.value);
   if(!em.value.trim()){ bad(em); return say(f,"Please enter your email."); }
@@ -599,7 +728,8 @@ function buildIndex(){
   const sec=(id,n)=>({n,t:"On this page",k:document.getElementById(id).textContent.toLowerCase().replace(/\s+/g," "),run:go(id)});
   INDEX=[
     {n:"About Us",t:"Page",k:"about us team",run:()=>soon("About Us")},
-    ...BRANDS.map(n=>({n,t:"Brand",k:"",run:()=>soon(n)})),
+    ...BRANDS.map(n=>({n,t:"Brand",k:"",run:()=>openBrand(n)})),
+    ...Object.entries(BR).flatMap(([bn,b])=>b.l.map(pr=>({n:pr,t:bn+" product",k:"",run:()=>openBrand(bn,pr)}))),
     ...UPDATES.map(n=>({n,t:"Update",k:"",run:()=>openUpdate(n)})),
     ...ALLPEOPLE.map(n=>({n,t:"Team member",k:"",run:()=>showView("team")})),
     sec("intro","Society Brands / SixEleven Team"), sec("promise","Our Promise"), sec("mission","Our Mission"), sec("service","Service That Makes a Meaningful Difference"),
@@ -662,13 +792,15 @@ const toTop=$("#toTop"); addEventListener("scroll",()=>toTop.classList.toggle("s
 toTop.onclick=()=>scrollTo({top:0,behavior:"smooth"});
 
 /* ===== Views: SBI Team Structure + Team Gallery ===== */
-const VIEWS={"SBI Team Structure":"team","Team Gallery":"gallery"};
+const VIEWS={"SBI Team Structure":"team","Team Gallery":"gallery","Operational SOPs":"sops","Top Performers":"top"};
 function openUpdate(n){ VIEWS[n]?showView(VIEWS[n]):soon(n); closeMenus(); }
 function showView(v){
-  ["home","team","gallery"].forEach(k=>$("#view-"+k).hidden=k!==v);
+  ["home","team","gallery","sops","top","brand"].forEach(k=>$("#view-"+k).hidden=k!==v);
   const el=$("#view-"+v); el.classList.remove("fadein"); void el.offsetWidth; el.classList.add("fadein");
   $$("#updatesDrop button").forEach(b=>{ const on=VIEWS[b.textContent]===v; b.classList.toggle("current",on); b.disabled=on; });
-  $("#updatesMenu .top").classList.toggle("here",v!=="home");
+  $("#updatesMenu .top").classList.toggle("here",v!=="home"&&v!=="brand");
+  $$("#brandsDrop button").forEach(b=>{ if(b.textContent.startsWith("PureCaps")) return; const on=v==="brand"&&b.textContent===curBrand; b.classList.toggle("current",on); b.disabled=on; });
+  $("#brandsMenu .top").classList.toggle("here",v==="brand");
   closeMenus(); window.scrollTo({top:0});
 }
 $(".title").onclick=()=>showView("home");
@@ -680,8 +812,7 @@ const MGMT=[
  ["Team Leadership",[["Joshua Bahinting","Senior Team Leader","seniorteamleader.png"],["Johnny Gayo","Team Leader","teamleader.png"]]],
  ["Officers-In-Charge",[["Julio Carbonell","Officer-In-Charge","officeincharge1.png"],["Marc Adaptar","Officer-In-Charge","officeincharge2.png"],["Zethsu Panilag","Officer-In-Charge","officeincharge3.png"]]]];
 const GROUPS=[
- ["Customer Service","#1f6b5c",["Abuda, Jemyma Benedae Benian","Andao, Ferrie Mae Villanel","Atas, Leizel Den Lintua","Badilla, Apple Mae Comoylao","Cabantac, Jivy Gubat","Cavan, Hannah Mae","Cavan, Sofia Beanca Binatac","Dandoy, Angelo Pagdato","Domagtoy, Jeneth Fontillas","Eleguir, Joanna Rose Silvosa","Fajardo, Carla Jean Mama","Jabonero, Shella Mae","Malayas, Louie Jay Bayno","Morante, Leonyl Jan","Navarro, Jonarose Himulatan","Sayawan, Christina Orfanel","Sumabong, Aldoresa Fuentes","Tenajeros, Rhea Vhie Robles","Ventic, Trishia"]],
- ["Live Chat Team","#5b8def",["Regis, Kier Vincent Veluz","Dalion, Kevin Ray Maangue"]],
+ ["Customer Service","#1f6b5c",["Abuda, Jemyma Benedae Benian","Andao, Ferrie Mae Villanel","Atas, Leizel Den Lintua","Badilla, Apple Mae Comoylao","Cabantac, Jivy Gubat","Cavan, Hannah Mae","Cavan, Sofia Beanca Binatac","Dalion, Kevin Ray Maangue","Dandoy, Angelo Pagdato","Domagtoy, Jeneth Fontillas","Eleguir, Joanna Rose Silvosa","Fajardo, Carla Jean Mama","Jabonero, Shella Mae","Malayas, Louie Jay Bayno","Morante, Leonyl Jan","Navarro, Jonarose Himulatan","Regis, Kier Vincent Veluz","Sayawan, Christina Orfanel","Sumabong, Aldoresa Fuentes","Tenajeros, Rhea Vhie Robles","Ventic, Trishia"]],
  ["Back Office Team","#d39a2c",["Ablao, Bryan Gutierrez","Prietos, Elijun Gualdajara","Alvar, Ralph","Sumagui, Mark Allen Apostol","Naranjo, Mikka Francine","Escarula, Jenelyn Beit","Balao, Jane Ann"]]];
 const ALLPEOPLE=[...MGMT.flatMap(t=>t[1].map(m=>m[0])),...GROUPS.flatMap(g=>g[2])];
 
@@ -712,6 +843,124 @@ $$(".tile").forEach(t=>t.onclick=()=>lbShow(+t.dataset.i));
 $("#lbp").onclick=e=>{e.stopPropagation();lbShow(cur-1);}; $("#lbnx").onclick=e=>{e.stopPropagation();lbShow(cur+1);};
 lb.addEventListener("click",e=>{ if(e.target===lb||e.target.closest("[data-close]")) lb.classList.remove("open"); });
 document.addEventListener("keydown",e=>{ if(!lb.classList.contains("open")) return; if(e.key==="ArrowLeft") lbShow(cur-1); if(e.key==="ArrowRight") lbShow(cur+1); });
+
+/* ===== Operational SOPs + Top Performers ===== */
+const IC={
+ voice:'<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/>',
+ email:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+ chat:'<path d="M21 12a8 8 0 0 1-11.6 7.1L3 21l1.9-5.4A8 8 0 1 1 21 12z"/>',
+ social:'<circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/>',
+ star:'<path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17l-6.1 3.6 1.4-6.8L2.2 9.1l6.9-.8z"/>',
+ shield:'<path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+ box:'<path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+ cash:'<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/>',
+ ticket:'<path d="M3 9V6h18v3a3 3 0 0 0 0 6v3H3v-3a3 3 0 0 0 0-6z"/>',
+ pin:'<path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+ flag:'<path d="M5 21V4M5 4h11l-2 4 2 4H5"/>',
+ trophy:'<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>',
+ team:'<circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.6 3-6 7-6s7 2.4 7 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14.5c2.4.7 4 2.5 4 5.5"/>'
+};
+const ico=k=>'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>';
+const ROLEI={"Voice":"voice","Email":"email","Chat":"chat","Social Media":"social","Reviews.IO":"star","Dispute":"shield","Quality Assurance":"shield","Amazon":"box","Returns":"box","Reshipments":"box","Refunds":"cash","Tickets":"ticket","Address Verifications":"pin","Team Leader":"flag","Officer-In-Charge":"flag"};
+const ROLEC={"Voice":"ch","Email":"ch","Chat":"ch","Social Media":"ch","Reviews.IO":"ch","Team Leader":"ld","Officer-In-Charge":"ld"};
+const chip=r=>'<span class="rc '+(ROLEC[r]||"op")+'">'+ico(ROLEI[r]||"star")+r+'</span>';
+
+const SOP=[
+ ["Management Team","#d39a2c","flag","The Management Team oversees daily operations across Customer Service and Back Office, ensuring team performance, service quality, and operational efficiency. We provide leadership, guidance, and support to the teams while driving accountability, maintaining standards, and ensuring smooth coordination across multiple brands. Day to day, the team monitors workloads and queues, coaches and mentors agents, reviews quality and performance results, and steps in to resolve escalations. It also keeps procedures and standards consistent, shares updates from the brands with the whole operation, and works hand in hand with the Customer Service and Back Office teams so every customer concern is handled quickly, accurately, and with care.",[
+  ["Bahinting, Joshua","Team Leader"],["Gayo, Johnny","Team Leader"],["Carbonell, Julio","Officer-In-Charge"],["Panilag, Zethsu","Officer-In-Charge"],["Adaptar, Marc Ryan","Officer-In-Charge"]]],
+ ["Customer Service Team","#1f6b5c","chat","The Customer Service Team manages customer interactions across multiple brands through email, live chat, and inbound and outbound calls. We focus on delivering timely, professional, and consistent support while ensuring a positive customer experience across every channel.",[
+  ["Carbonell, Julio Miguel","Officer-In-Charge"],["Adaptar, Marc Ryan","Officer-In-Charge"],["Abuda, Jemyma Benedae","Voice|Email"],["Andao, Ferrie Mae","Voice|Email"],["Atas, Leizel Den","Voice|Email"],["Badilla, Apple Mae","Voice|Email"],["Cabantac, Jivy","Voice|Email"],["Cavan, Hannah Mae","Voice|Email"],["Cavan, Sofia Beanca","Voice|Email|Chat"],["Dalion, Kevin Ray","Chat|Email"],["Dandoy, Angelo","Voice|Email"],["Eleguir, Joanna Rose","Voice|Email"],["Fajardo, Carla Jean","Voice|Email"],["Jabonero, Shella Mae","Voice|Email"],["Malayas, Louie Jay","Voice|Email|Chat"],["Morante, Leonyl Jann","Voice|Email"],["Navarro, Jonarose","Voice|Email"],["Regis, Kier Vincent","Voice|Email|Chat"],["Sumabong, Aldoresa","Voice|Email"],["Tenajeros, Rhea Vhie","Voice|Email|Social Media|Reviews.IO"],["Vios, John Clifford II","Voice|Email"]]],
+ ["Back Office Team","#5b8def","box","The Back Office Team manages essential operational tasks across multiple brands, including refunds, returns, disputes, reshipments, Amazon operations, social media management, and address verification. The team supports efficient case resolution, accurate order processing, and smooth day-to-day operations.",[
+  ["Panilag, Zethsu","Dispute|Officer-In-Charge"],["Ablao, Bryan","Dispute"],["Escarula, Jenelyn","Amazon|Social Media"],["Balao, Jane Ann","Social Media"],["Prietos, Elijun","Refunds|Reshipments|Returns"],["Alvar, Ralph","Voice|Tickets|Refunds|Reshipments"],["Naranjo, Mikka","Address Verifications|Returns"],["Sumagui, Mark Allen","Quality Assurance"]]]
+];
+const head=(t,p)=>'<div class="vhead"><div><small>Updates</small><h2>'+t+'</h2><p>'+p+'</p></div><button class="back" data-home>← Back to home</button></div>';
+const PHOTO={"Bahinting, Joshua":"seniorteamleader.png","Gayo, Johnny":"teamleader.png","Carbonell, Julio":"officeincharge1.png","Carbonell, Julio Miguel":"officeincharge1.png","Adaptar, Marc Ryan":"officeincharge2.png","Panilag, Zethsu":"officeincharge3.png"};
+const isLead=r=>/Team Leader|Officer-In-Charge/.test(r);
+function sopTeam([t,c,i,d,m],idx){
+  const tally={}; m.forEach(([n,r])=>r.split("|").forEach(x=>tally[x]=(tally[x]||0)+1));
+  const roles=Object.entries(tally).sort((a,b)=>b[1]-a[1]);
+  const leads=m.filter(x=>isLead(x[1]));
+  const lblLead=idx===0?"Leadership":"Led by";
+  const banner='<div class="sop-b rv"><div class="wm">'+ico(i)+'</div><h3>'+ico(i)+t+'</h3><p>'+d+'</p>'+
+    '<div class="pills"><span class="pill">'+ico("team")+m.length+' members</span><span class="pill">'+ico("star")+roles.length+' focus areas</span></div>'+
+    '<div class="lead">'+lblLead+'<div class="stack">'+leads.map(([n])=>avatar(n,"xs",PHOTO[n])).join("")+'</div></div></div>';
+  const cov='<div class="cov rv"><h4>Coverage: who handles what</h4>'+roles.map(([r,n])=>'<div class="cv"><span class="lb">'+ico(ROLEI[r]||"star")+r+'</span><span class="tr"><i style="--w:'+Math.round(n/m.length*100)+'%"></i></span><span>'+n+'</span></div>').join("")+'</div>';
+  const members=idx===0
+    ? '<div class="mpg">'+m.map(([n,r])=>'<article class="mp rv">'+avatar(n,"big",PHOTO[n])+'<h4>'+n+'</h4><div class="chips" style="justify-content:center">'+r.split("|").map(chip).join("")+'</div></article>').join("")+'</div>'
+    : '<div class="sg">'+m.map(([n,r])=>'<div class="sm2 rv">'+avatar(n,"sm",PHOTO[n])+'<div><b>'+n+'</b><div class="chips">'+r.split("|").map(chip).join("")+'</div></div></div>').join("")+'</div>';
+  return '<section class="sop" id="sop-'+idx+'" style="--c:'+c+'">'+banner+cov+members+'</section>';
+}
+const TOT=SOP.reduce((a,t)=>a+t[4].length,0);
+$("#view-sops").innerHTML=head("Operational SOPs","How our operation is organized and who covers what.")+
+ '<div class="shero rv"><div class="shl"><div class="ib">'+ico("team")+'</div><div><h3>One operation, three teams</h3><p>Management, Customer Service and Back Office work side by side to support multiple brands. Each team has a clear focus, and every member is listed below with the channels or tasks they cover, so you always know who to turn to.</p></div></div>'+
+ '<div class="shr"><input id="sopq" type="search" placeholder="Find a person or role… (e.g. Voice, Refunds)" aria-label="Find a person or role"><div class="jump">'+SOP.map(([t,c,i,d,m],k)=>'<button type="button" data-jump="sop-'+k+'">'+ico(i)+t.replace(" Team","")+'<b>'+m.length+'</b></button>').join("")+'</div><small id="sopc"></small></div></div>'+
+ '<div class="rings">'+SOP.map(([t,c,i,d,m])=>{const pc=Math.round(m.length/TOT*100); return '<div class="rt rv" style="--c:'+c+';--pp:'+pc+'"><div class="ring"><div class="rc2">'+ico(i)+'</div></div><div class="rtx"><b data-count="'+m.length+'">0</b><span>'+t+'</span><em>'+pc+'% of the operation</em></div></div>';}).join("")+'</div>'+
+ SOP.map(sopTeam).join("");
+$$("[data-jump]").forEach(b=>b.onclick=()=>$("#"+b.dataset.jump).scrollIntoView({behavior:"smooth",block:"start"}));
+$("#sopq").addEventListener("input",e=>{ const v=e.target.value.trim().toLowerCase(); let n=0; $$("#view-sops .sm2,#view-sops .mp").forEach(c=>{ const ok=!v||c.textContent.toLowerCase().includes(v); c.hidden=!ok; if(ok) n++; }); $("#sopc").textContent=v?n+" match"+(n===1?"":"es")+" found":""; });
+function countUp(el){ const to=+el.dataset.count, t0=performance.now(); const st=t=>{ const k=Math.min(1,(t-t0)/1300); el.textContent=Math.round(to*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(st); }; requestAnimationFrame(st); }
+
+const TOP=[
+ ["September",["Panilag, Zethsu","Escarula, Jenny"],"Celebrating the people who continue to raise the bar! Congratulations to our top performers for September 2026 for their hard work, commitment, and exceptional contributions. Your achievements reflect the determination to excel and inspire others to reach greater heights. Keep shining, team!"],
+ ["August",["Abuda, Jemyma Benedae","Dandoy, Angelo","Cabantac, Jivy"],"Success is even more meaningful when celebrated together! Let's recognize our outstanding top performers for August 2026, whose dedication, teamwork, and consistent efforts have contributed to another month of remarkable achievements. Congratulations to all our achievers for making excellence a shared success!"],
+ ["July",["Cabantac, Jivy"],"Another month, another achievement worth celebrating! Congratulations to our Top Performer for July 2026 for going above and beyond and setting an excellent example of dedication and perseverance. Here's to continued success!"],
+ ["June",["Badilla, Apple Mae"],"Celebrating a standout performance! Let's give a big round of applause to our Top Performer for June 2026 for the commitment, determination, and passion that drive success. Keep shining and inspiring!"],
+ ["May",["Tenajeros, Rhea Vhie"],"Recognizing excellence, one achievement at a time! Congratulations to our Top Performer for May 2026 for demonstrating dedication, consistency, and outstanding performance. Your hard work truly deserves the spotlight!"],
+ ["April",["Sumagui, Mark Allen","Badilla, Apple Mae","Dalion, Kevin Ray","Andao, Ferrie Mae"],"Celebrating dedication, recognizing excellence, and honoring success! Let's shine the spotlight on our top performers for April 2026, whose hard work, commitment, and outstanding achievements continue to make a difference. Congratulations on your well-deserved recognition! Keep striving for greatness!"],
+ ["March",["Sumagui, Mark Allen","Carbonell, Julio Miguel","Dalion, Kevin Ray","Tenajeros, Rhea Vhie"],"Recognizing excellence and celebrating success! Let's give a round of applause to our top performers for March 2026, whose dedication, perseverance, and outstanding contributions continue to inspire greatness. Congratulations on another month of remarkable achievements!"],
+ ["February",["Domagtoy, Jeneth","Sumabong, Aldoresa","Eleguir, Joanna Rose","Atas, Leizel Den","Sumagui, Mark Allen","Andao, Ferrie Mae"],"Celebrating another month of excellence! Join us in recognizing our outstanding top performers for February 2026, whose dedication, hard work, and commitment continue to drive success. Congratulations to all our achievers for their remarkable performance and well-deserved recognition!"],
+ ["January",["Dalion, Kevin Ray","Sayawan, Christina","Sumalinog, Herlyn Grace","Adaptar, Marc Ryan"],"Celebrating the people behind the success! Join us in recognizing our outstanding top performers for January 2026, whose dedication, hard work, and commitment to excellence continue to make a difference. Congratulations to all our achievers! Your efforts deserve to be celebrated."]
+];
+const tally={}; TOP.forEach(t=>t[1].forEach(n=>tally[n]=(tally[n]||0)+1));
+const maxN=Math.max(...Object.values(tally)), best=Object.keys(tally).filter(n=>tally[n]===maxN);
+$("#view-top").innerHTML=head("Top Performers","Celebrating the people who raise the bar, month after month.")+
+ '<div class="intro rv"><div class="ib">'+ico("trophy")+'</div><p>Every month we recognize team members whose dedication, teamwork and consistent performance stand out. Here are our 2026 honorees, newest first. Congratulations to everyone on the list, and thank you for inspiring the team!</p></div>'+
+ '<div class="sstats"><div class="sstat rv" style="--c:#d39a2c"><div class="ib">'+ico("trophy")+'</div><div><b>'+TOP.length+'</b><span>Months celebrated</span></div></div>'+
+ '<div class="sstat rv" style="--c:#1f6b5c"><div class="ib">'+ico("star")+'</div><div><b>'+TOP.reduce((a,t)=>a+t[1].length,0)+'</b><span>Recognitions in 2026</span></div></div>'+
+ '<div class="sstat most rv" style="--c:#5b8def"><div class="ib">'+ico("flag")+'</div><div><b>'+best.join("; ")+'</b><span>Most recognized ('+maxN+'×)</span></div></div></div>'+
+ '<div class="tl">'+TOP.map(([m,names,txt],i)=>'<article class="tc rv'+(i===0?" latest":"")+'"><div class="tc-h"><div class="ib">'+ico("trophy")+'</div><h3>'+m+' 2026 Top Performer'+(names.length>1?"s":"")+'</h3>'+(i===0?'<span class="tag2">Latest</span>':'')+'</div><p>'+txt+'</p><div class="hon">'+names.map(n=>'<div class="hn">'+avatar(n,"sm")+'<span>'+n+'</span>'+ico("star")+'</div>').join("")+'</div></article>').join("")+'</div>';
+
+/* Reveal-on-scroll animation + home buttons for the new pages */
+const io="IntersectionObserver" in window?new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); e.target.querySelectorAll("[data-count]").forEach(countUp); io.unobserve(e.target); setTimeout(()=>e.target.style.transitionDelay="",1000); } }),{threshold:.1}):null;
+["#view-sops","#view-top"].forEach(v=>$$(v+" .rv").forEach((el,i)=>{ el.style.transitionDelay=(i%6)*70+"ms"; io?io.observe(el):el.classList.add("in"); }));
+$$("[data-home]").forEach(b=>b.onclick=()=>showView("home"));
+
+/* ===== Brand pages (Brands menu) ===== */
+IC.air='<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8"/>';
+IC.leaf='<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15"/><path d="M5 19l8-8"/>';
+IC.pulse='<path d="M3 12h4l2-6 4 12 2-6h6"/>';
+IC.sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>';
+const X=t=>t.replace(/§T/g,"Toothpowder / Powdered Mineral Toothpaste").replace(/§K/g,"Kids Toothpowder / Powdered Mineral Toothpaste").replace(/§L/g,"Limited Edition Dirty Mouth Toothpowder").replace(/§P/g,"Toothpowder Package").replace(/§3/g,"/ 1 oz./3 Month").replace(/§1/g,"/ 0.25 oz./One Month").replace(/§R/g,"/ 4 oz./Refill/Family");
+const LL=t=>t.split("~").map(x=>X(x).replace(/\s+/g," ").trim()).sort((a,b)=>a.localeCompare(b,"en",{sensitivity:"base",numeric:true})); // A–Z
+const BR={
+"Clarifion":{c:"#3b9ae1",i:"air",d:"Clarifion is a wellness and air-quality brand focused on developing accessible indoor air improvement solutions designed to support cleaner, fresher living environments, offering technologies that address airborne particles, odors, and overall air freshness through a mix of ionization, filtration, and sanitization-based approaches depending on the product line, with an emphasis on simple, home-friendly devices intended for everyday air quality support.",
+ l:LL("Clarifion Air Ionizer~Clarifion DSTx~Clarifion ODRx~Clarifion DSTx Filters~Clarifion ODRx Replacement Bulb~Aer Clear Replacement Filter~Clarifion 2-Year Warranty~Microfiber Duster Pole~VIP Membership~Clear Air - upsell~Mullein Drops - Upsell~Cat Calming Diffuser - Upsell~Clarifion Whole-Home Bundle")},
+"Cleanomic":{c:"#2e9e5b",i:"leaf",d:"Cleanomic is a sustainability-focused consumer brand that develops eco-friendly household and lifestyle essentials designed to reduce environmental impact through the use of plant-based, compostable, and lower-waste materials, offering solutions that extend beyond food storage into other everyday categories such as home care and laundry, with an overall emphasis on practical functionality, safer material choices, and supporting more sustainable routines across common household needs.",
+ l:LL("Subscription: Cleanomic Trash Bag Bundle~Cleanomic's Clean Planet Club~Home Cleaning Kit~Hand Soap Combo~Foaming Hand Soap Tablets - Meyer Lemon~Foaming Hand Soap Tablets - French Lavender~Earthwash: Ocean Breeze~Earthwash: Scent-Free~Reusable Spray Bottle~Reusable Soap Bottle~Oxy Bright Laundry Tablets (Color)~Multi-Surface Cleaning Tablets~Compostable 13-Gallon Waste Bags~Compostable* Zip Snack Bags~Compostable* Zip Quart Bags~Compostable* Zip Sandwich Bags~Compostable* Zip Gallon Bags~Dishwasher Detergent Eco-Tablets~Washer Cleaner Tablets~Touchless Soap Dispenser~Free Trash Bags For Life (Kitchen V4)~Free Trash Bags For Life (Kitchen V5)~Eco-Laundry Value Bundle~Earthfresh Dryer Sheets~Garbage Disposal Cleansing Tablets~Earthwash Laundry Detergent Sheets~Reusable Kitchen Cloths~Ultimate Eco-Laundry Bundle~Color Shield Sheets~Free Trash Bags For Life (Kitchen V2)~VIP Membership~Super Bamboo~Free Trash Bags For Life (Gallon Size)~A Fruit + Veggie Wash Cleaning Tablets~Free Trash Bags For Life (Kitchen)~Cleanomic Trash Bag Bundle - ECO-HOME VALUE PACKAGE (Scent Free)~B Kitchen Basics Kit Bundle: Choose 3 Products~Laundry Starter Kit~Oxy Laundry Booster Tablets - White~Wood + Flooring Cleaning Tablets~Bundle: Choose 5 Products")},
+"Primal Life Organics":{c:"#b07a4a",i:"leaf",d:"Primal Life Organics is a natural oral and personal care brand that focuses on creating non-toxic, earth-derived products formulated with mineral-rich clays, plant-based ingredients, and essential oils, positioning itself around holistic wellness and cleaner ingredient alternatives to conventional toothpaste and personal care items, with an emphasis on supporting everyday routines through simple, nature-inspired formulations.",
+ l:LL("Ignite Cinnamon Shine Powdered Mineral Toothpaste~§L - Lemon Ginger / 1 OZ./3 MONTH~§L - Strawberries & Cream / 1 OZ./3 MONTH~§T - Black Licorice §3~§T - Sweet Peppermint §R~After-Shave Gruff~Bamboo Replacement Brush Heads for Sonic Toothbrush - REAL WHITE by Primal Life~Banished Blemish Serum~Beard Oil, Gruff~Beyond Serum, 0.5 oz~Blu Berry Serum, Skin Brightening Serum~Blu Coffee Revival Package~Body Wash Bar - Citrus Cranberry~Brush Your Teeth With Dirt! - Freshly Unflavored §3~Carrot Seed Package, Norm-Oily~Carrot Seed Serum, 0.5 oz~Charcoal Toothbrush - Adult Double Pack~Charcoal Toothbrush - Subscription - Adult Double Pack~Cinnamon Shine Lip Balm - Tinted~Coffee Bean Serum~Dental Boost - Peppermint~Dental DETOX KIT~Dental Floss, Bamboo-Charcoal~Deodorant 0.75 oz Stick Up (1 Month) - White Coconut~Deodorant 0.75 oz Stick Up (1 Month) - White Lavender~Deodorant 3 oz Stick Up (3 Month) - Black Lavender~Deodorant 3 oz Stick Up (3 Month) - Pine~Deodorant 3 oz Stick Up (3 Month) - White Coconut~Dirty Mouth Gum Drops, 0.5 oz - 1 | Full Price~Earth Cleanser: Detoxifying | Polishing~Funki Foot Repair Balm, 4 oz~Glow Package~Grunt Lip Balm~Gum Drops, 0.5 oz - Subscription - Single~Hand Repair Unscented, 2 oz~§K - Freshly Unflavored §1~§K - Fruity Bubblegum §3~§K - Subscription - Fruity Bubblegum §R~Lickity Split Serum, 0.5 oz~§L - Peppermint Thyme / 1 OZ./3 MONTH~Limited Edition Luminous Lemon Toothpowder~Loyal Customer Real White Sonic Toothbrush~Onward Checkout+ - Protect against loss, theft and damage~Oral Wellness Teeth Whitening System - LIMITED~Pomegranate Cleanser, Dry | Sensitive~Pomegranate Moisturizer, Normal to Dry~Real White Pulling Oil~Real White Teeth Whitening Pens - Original~Salty Hair Texturizing Spray~Salty Hair Texturizing Spray, 2.5 oz~Silver Hand-it-izer Spray, Colloidal Silver+~Smile Starter Bundle - Sparkling Spearmint~Teeth Whitening Gel Pods- 10 Treatments with Hydroxyapatite + Xylitol~Toothpaste - Fruity Bubblegum~Toothpaste - Fruity Bubblegum / 1.85~Toothpaste - Polished Peppermint / 1.85~Toothpaste - Polished Peppermint/ 4 oz~Toothpaste - Sparkling Spearmint / 1.85~Toothpaste Chews! - Peppermint 30-Day Jar~Toothpaste Chews! - Peppermint Refill Bag~§T - Clean Citrus Spice §3~§T - Fruity Bubblegum §3~§T - Luminous Lemon §1~§T - Polished Peppermint §1~§T - Polished Peppermint §3~§T - Sparkling Spearmint §1~§T - Sparkling Spearmint §3~§T - Sweet Peppermint §1~§T - Unflavored §1~§T - Unflavored §R~§T - Whitening Peppermint (Charcoal) §3~§T - Whitening Spearmint (Charcoal) §3~§T - Whitening Spearmint (Charcoal) §R~§T Luminous Lemon §3~§T– Subscription - Whitening Peppermint (Charcoal) §3~§P - Fruity Bubblegum / 4 oz. Refill/ Family size~§P - Polished Peppermint / Jar 1 oz/ 3 month~§P– Subscription - Sparkling Spearmint / Jar 1 oz/ 3 month~§P Whitening Spearmint (Charcoal) / Jar 1 oz/ 3 month~Travel Hack Bundle - Sparkling Spearmint~Unscented Body Butter, 6 oz~V4 Real White Teeth Whitening System - 1-YEAR WARRANTY~V4 Real White Teeth Whitening System (Liquidation Sale) - 1-YEAR WARRANTY~V4 SILICONE MOUTH GUARD~Whitening Bundle~§T– Subscription - Luminous Lemon~§T - Unflavored §3~Deodorant 3 oz Stick Up (3 Month) - Black Rogue~Deodorant 3 oz Stick Up (3 Month)– Subscription - White Lavender~Deodorant 3 oz Stick Up (3 Month)– Subscription - Pine~Toothpaste Chews! - Spearmint 30-Day Jar~Toothbrush & Toothpowder Pack– Subscription - Polished Peppermint / Mini 60-Day~Oral Wellness Kit - POLISHED PEPPERMINT/WHITENING PEPPERMINT~§T - Sparkling Spearmint §R~§K - Subscription - Fruity Bubblegum §1~§T– Subscription - Polished Peppermint §1~§P– Subscription - Polished Peppermint / Jar 1 oz/ 3 month~§T - Charcoal Cinnamon Shine §3~Teeth Whitening Gel Pods- 10 Treatments with Hydroxyapatite– Subscription + Xylitol~Brush Your Teeth With Dirt! - Whitening Spearmint §3~Beyond Face Moisturizer - Subscription~Hand Repair Unscented, 2 oz– Subscription~Deodorant 0.75 oz Stick Up (1 Month) - Subscription - Black Rogue~Lickity Split Serum, 0.5 oz - Subscription~Beyond Serum, 0.5 oz - Subscription~Sun-Up Sun Protection 3oz Tin~Bug Spray, Boot-A-Pest 4 oz~Black Pack MINI - Whitening Spearmint / Black Rogue~Triple Threat Toothpowder Bundle~§T - Polished Peppermint §R~Toothpaste - Sparkling Spearmint / 4 oz~§T– Subscription - Sweet Peppermint §3~§T - Wintergreen §3~Toothpaste Chews! - Spearmint Refill Bag~Toothpaste Package - Polished Peppermint~§T - Wintergreen (Charcoal) §1~Toothpaste Package– Subscription - Polished Peppermint~§T– Subscription - Polished Peppermint §3~Tongue Scraper (copper)~ZAP!! Toothbrush Cleaner~NEW Real White Sonic Toothbrush~§T - Sweet Spearmint §3~§T– Subscription - Sweet Spearmint §1~§K - Subscription - Fruity Bubblegum §3~§L - Coconut Vanilla / 1 OZ./3 MONTH~§L - Berry Mint / 1 OZ./3 MONTH~Oral Wellness Teeth Whitening System~Real White Teeth Whitening Pens - Cinamon Shine~§T– Subscription - Unflavored §3~Kids Bubblegum Toothpaste - Subscription~§T– Subscription - Whitening Peppermint (Charcoal) §R~Mouth Makeover Package~§P - Whitening Peppermint (Charcoal) / 4 oz. Refill/ Family size~Charcoal Toothbrush - Subscription - Adult Single~§T– Subscription - Sparkling Spearmint §3~§P– Subscription - Whitening Peppermint (Charcoal) / Jar 1 oz/ 3 monthnt~§T– Subscription - Clean Citrus Spice §3~Shampoo Bar, Conditioning~Carrot Seed Moisturizer~Body Wash Bar - Green Tea Peppermint~§T– Subscription - Polished Peppermint §R~§T– Subscription - Sparkling Spearmint §R~Torn Up Skin Repair~Lip Sun Protection~Charcoal Toothbrush - Subscription - Kids Single~§T - Sweet Peppermint §3~§T - Whitening Peppermint (Charcoal) / 0.25 oz. / One Month~§T - Sweet Spearmint §R~§P– Subscription - Sweet Peppermint / Jar 1 oz/ 3 month~Torn Up Skin Repair – Subscription~§T– Subscription - Luminous Lemon §1~§T– Subscription - Sparkling Spearmint §1~Real White Pulling Oil - Subscription~Pomegranate Package: Dry | Chemical Sensitive - Subscription~Beyond Face Moisturizer~Carrot Seed Cleanser: Oily | Sensitive - Subscription~Gum Drops, 0.5 oz - Subscription - Double~§L - Coconut Lime / 1 OZ./3 MONTH~Brush Your Teeth With Dirt! - Sweet Peppermint §1~Real White Teeth Whitening Strips~§T– Subscription - Whitening Spearmint (Charcoal) §1~§L - Firecracker Freeze / 1 OZ./3 MONTH~Wooden Toothpowder Box~Cinnamon Shine Powdered Mineral Toothpaste~§L Watermelon Mojito~V5 Real White LED Teeth Whitening System~§L Strawberry Mango / 1 OZ./3 MONTH~§L Piña Colada / 1 OZ./3 MONTH~§P– Subscription - Sweet Spearmint / Jar 1 oz/ 3 month~Toothpaste-Subscription - Sparkling Spearmint / 1.85~Black Pack MINI - Subscription - Whitening Peppermint / Black Lavender~§L - Peach Mango / 1 OZ./3 MONTH~Body Wash Bar - Earth~Mini Stick Up Deodorant Bundle - 0.75 oz~Charcoal & Spice Power Bundle~Peroxide-Free Whitening Pens - Advanced~Wooden Toothpowder Box Package - Whitening Spearmint (Charcoal)~§L - Caramel Apple / 1 OZ./3 MONTH~Teeth Whitening Gels- Lifetime Supply")},
+"Club EarlyBird":{c:"#e8a43a",i:"sun",d:"Club EarlyBird is a wellness and consumer lifestyle brand focused on providing sleep and recovery-oriented solutions designed to help improve rest quality and nighttime routines, offering products and tools that support relaxation, better sleep habits, and overall restorative wellness, with an emphasis on simple, accessible self-care for everyday users.",
+ l:LL("Pink Guava Colada~Blood Orange Mimosa~Stevia Miami Vice~Blue Razz Chiller~Honey Lemon Stevia~Strawberry Mocha Frappuccino~Berry Crumble~Orange Dreamsicle~Brain Drops~The Total Package~Elite Membership~Pineapple Mimosa~Cocktail Shaker~Grape Popsicle~White Chocolate Mocha~Rocketberry Chiller~EarlyBird Shipping Protection~Tiki Sunrise~Morning & Night Ritual~Morning Routine Booklet~Morning Routine Secrets~The “All-Day Energy” Bundle~Navidium Shipping Protection~Travel Packs~Black Cherry Cosmo")},
+"Wolf Tactical":{c:"#6b7a3a",i:"shield",d:"Wolf Tactical is a tactical and outdoor gear brand that focuses on durable, performance-driven equipment designed for training, preparedness, and field use, offering products such as bags, apparel, and survival-oriented accessories built for rugged conditions, with an emphasis on reliability, functionality, and utility for both professional and civilian users in outdoor, fitness, and tactical environments.",
+ l:LL("Weight Vest Plates~Curved Weight Vest Plates~Workout Sandbag~Weighted Training Vest~Quick-Release Weighted Vest~Simple Weighted Vest~Compact Chest Pack~Weighted Rucking Backpack~Plate Carrier Chest Pack~Weightlifting Belt~Weighted Vest Plate Carrier~Alpha Anti Age - NAD Dietary Supplement~Alpha Testosterone - Advanced T-Booster~Alpha Pre-Workout - Advanced Energy Booster~Alpha Greens - Daily Superfood Nutrition~Alpha Sleep Aid - Advanced Sleep & Recovery Support~Alpha Protein - Whey Protein Powder~Heavy Duty Quick-Release EDC Belt~Heavy Duty Hybrid Quick-Release EDC Belt~Heavy Duty Simple EDC Belt~Heavy Duty Riggers Belt~Simple EDC/Inner Belt~Everyday Riggers Belt~Ratchet EDC Belt~Belly Band Holster~MOLLE Duty Belt~Hook Liner Inner Belt~Loop Liner Inner Belt~MOLLE Battle Belt~Molle Battle Belt Lite~Compact EDC Sling Bag~EDC Sling Bag~24L EDC Daypack~MOLLE Dump Pouch~Hybrid Waist Pack~Drop Leg Holster~MOLLE Holster~Tactical Dog Leash~Tactical Dog Collar~Tactical Shooting Gloves~Checkout+~Baby Hip Carrier~Beanie~Baby Carrier")},
+"Vitality Now":{c:"#8a5cd0",i:"pulse",d:"Vitality Now is a health and wellness supplement brand focused on developing natural, science-informed formulations designed to support vitality, energy, and overall well-being, positioning its products around areas such as hormonal balance, physical performance, and daily wellness support, with an emphasis on clean ingredients and lifestyle-based health improvement.",
+ l:LL("Youthful Brain~Stem Cell Renew~Youthful Sleep~Youthful Prostate~Life Pulse~Exodus Boost~Youthful Joints~Nail Exodus~Youthful Nails Plus~Youthful Greens Plus~Youthful Digest~EndoCan Relief~Exodus Boost Oil")}
+};
+let curBrand="";
+function openBrand(n,q){
+  const b=BR[n]; if(!b) return soon(n);
+  curBrand=n;
+  $("#view-brand").innerHTML=head(n,"Brand information and product list.").replace("<small>Updates</small>","<small>Brands</small>")+
+   '<div style="--c:'+b.c+'"><div class="bn rv"><div class="wm">'+ico(b.i)+'</div><small>'+n+' information</small><h3>'+n+'</h3><p>'+b.d+'</p><div class="pills"><span class="pill">'+ico("box")+b.l.length+' products</span><span class="pill">'+ico(b.i)+'Brand overview</span></div></div>'+
+   '<div class="ph-head rv"><h3>Products<em>'+b.l.length+'</em></h3><input class="bq" id="bq" type="search" placeholder="Search '+n+' products…" aria-label="Search products"></div>'+
+   '<div class="pgrid" id="pgrid">'+b.l.map((t,k)=>'<div class="pc rv"><i>'+(k+1)+'</i><span>'+t.replace(/&/g,"&amp;").replace(/</g,"&lt;")+'</span></div>').join("")+'</div><p class="noprod" id="noprod" hidden>No products match your search.</p></div>';
+  $("#view-brand [data-home]").onclick=()=>showView("home");
+  $("#bq").addEventListener("input",e=>{ const v=e.target.value.trim().toLowerCase(); let c=0; $$("#pgrid .pc").forEach(x=>{ const ok=!v||x.textContent.toLowerCase().includes(v); x.hidden=!ok; if(ok) c++; }); $("#noprod").hidden=c>0; });
+  $$("#view-brand .rv").forEach((el,i)=>{ el.style.transitionDelay=Math.min(i%8,7)*50+"ms"; io?io.observe(el):el.classList.add("in"); });
+  showView("brand");
+  if(q){ const f=$("#bq"); f.value=q; f.dispatchEvent(new Event("input")); }
+  closeMenus();
+}
 </script>
 </body>
 </html>
