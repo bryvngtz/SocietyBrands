@@ -638,7 +638,7 @@ async function loadDash(k,force){
       if(!res.ok) throw new Error("HTTP "+res.status+" on tab “"+tab+"”");
       const n=norm(await res.text(),type,tab,SRC[k].cols); rows=rows.concat(n.rows); hasAmt=hasAmt||n.hasAmt;
     }
-    d.rows=rows; d.hasAmt=hasAmt; d.demo=false;
+    d.rows=rows; d.hasAmt=hasAmt; d.demo=false; d.imported=null;
   }catch(e){ d.err=(e&&e.message)||"unknown error"; d.rows=demo(k); d.hasAmt=true; d.demo=true; }
   d.state="ready"; if(BO.sub===k) renderBO();
 }
@@ -690,7 +690,7 @@ function pageHtml(k,rows,ch){
   if(p==="month"){
     ch.push({id:"c1",type:"bar",labels:ml,data:MO.map(x=>x.n),label:noun});
     if(d.hasAmt) ch.push({id:"c2",type:"line",labels:ml,data:MO.map(x=>Math.round(x.amt)),label:"Amount ($)"});
-    return '<div class="charts">'+cc("c1",noun+" per month",!d.hasAmt)+(d.hasAmt?cc("c2","Amount per month"):"")+'</div>'+wrap("Monthly breakdown",tbl(["Month",noun,"Change"].concat(d.hasAmt?["Amount"]:[]),MO.map((x,i)=>[MLAB[x.k]||x.k,x.n,i?((x.n-MO[i-1].n>=0?"+":"")+(x.n-MO[i-1].n)):"–"].concat(d.hasAmt?[money(x.amt)]:[])),1));
+    return '<div class="charts">'+cc("c1",noun+" per month",!d.hasAmt)+(d.hasAmt?cc("c2","Amount per month"):"")+'</div>'+wrap("Monthly breakdown",tbl(["Month",noun,"Change"].concat(d.hasAmt?["Amount"]:[]),MO.map((x,i)=>[MLAB[x.k]||x.k,x.n,i?((x.n-MO[i-1].n>=0?"+":"")+(x.n-MO[i-1].n)):"–"].concat(d.hasAmt?[money(x.amt)]:[])).reverse(),1));
   }
   if(p==="root"){
     const C8=C.slice(0,8), oth=C.slice(8).reduce((t,x)=>t+x.n,0);
@@ -705,10 +705,9 @@ function recTable(k){
   if(st.p==="refunds") r=r.filter(x=>x.t==="Refund"); if(st.p==="reships") r=r.filter(x=>x.t==="Reship");
   if(q) r=r.filter(x=>[x.m,x.b,x.p,x.rs,x.rc,x.mid,x.st,x.id].join(" ").toLowerCase().includes(q));
   r=r.slice().sort((a,b)=>a.mk<b.mk?1:-1);
-  const per=20, pages=Math.max(1,Math.ceil(r.length/per)); st.pg=Math.min(st.pg,pages-1);
-  const slice=r.slice(st.pg*per,st.pg*per+per);
-  $("#dtab").innerHTML=(r.length?tbl(["Filed","Brand","Product","Reason","Root cause","MID","Status"].concat(d.hasAmt?["Amount"]:[]),slice.map(x=>[x.m,esc(x.b),esc(x.p),esc(x.rs),esc(x.rc),esc(x.mid),x.st?'<span class="tag">'+esc(x.st)+'</span>':"",].concat(d.hasAmt?[money(x.amt)]:[])),d.hasAmt?7:null):'<div class="aempty">No records found.</div>')+
-    '<div class="pager"><span>'+r.length+' record'+(r.length===1?'':'s')+' · Page '+(st.pg+1)+' of '+pages+'</span><button data-pg="-1"'+(st.pg<=0?' disabled':'')+'>‹ Prev</button><button data-pg="1"'+(st.pg>=pages-1?' disabled':'')+'>Next ›</button></div>';
+  const head=["Case ID","Filed","Brand","Product","Reason","Root cause","MID","Status"].concat(d.hasAmt?["Amount"]:[]);
+  $("#dtab").innerHTML=(r.length?'<div style="max-height:640px;overflow:auto">'+tbl(head,r.map(x=>[esc(x.id),x.m,esc(x.b),esc(x.p),esc(x.rs),esc(x.rc),esc(x.mid),x.st?'<span class="tag">'+esc(x.st)+'</span>':""].concat(d.hasAmt?[money(x.amt)]:[])),d.hasAmt?8:null)+'</div>':'<div class="aempty">No records found.</div>')+
+    '<div class="pager"><span>Showing all '+r.length+' record'+(r.length===1?'':'s')+' (scroll the table)</span></div>';
 }
 function filtered(k){ const f=BO.st[k]; return D[k].rows.filter(r=>(!f.m||r.mk===f.m)&&(!f.b||r.b===f.b)&&(!f.d||r.mid===f.d)); }
 function mkChart(c){
@@ -738,7 +737,7 @@ function renderBO(){
     h+='<div class="dash"><aside class="side"><h4>Navigation</h4>'+PAGES[k].map(p=>'<button class="nv'+(st.p===p[0]?' on':'')+'" data-p="'+p[0]+'">'+p[1]+'</button>').join('')+'<hr><h4>Filters</h4>'+
       '<label for="fM">Filed month</label><select id="fM" data-f="m">'+opt(mo,st.m)+'</select><label for="fB">Brand</label><select id="fB" data-f="b">'+opt(br,st.b)+'</select><label for="fD">MID</label><select id="fD" data-f="d">'+opt(mi,st.d)+'</select>'+
       '<button class="mini" id="bReset">Reset filters</button><button class="mini" id="bReload">↻ Refresh data</button>'+
-      '<div class="dsrc">'+(d.state==="loading"?'Loading from Google Sheets…':'<i class="'+(d.demo?'demo':'')+'"></i>'+(d.demo?'Demo data':'Live from Google Sheets')+' · '+d.rows.length+' records')+'</div></aside><div id="dc">'+(d.state==="ready"?'':'<div class="aempty">Loading data from Google Sheets…</div>')+'</div></div>';
+      '<div class="dsrc">'+(d.state==="loading"?'Loading from Google Sheets…':'<i class="'+(d.demo?'demo':'')+'"></i>'+(d.demo?'Demo data':(d.imported?'Imported: '+esc(d.imported):'Live from Google Sheets'))+' · '+d.rows.length+' records')+'</div></aside><div id="dc">'+(d.state==="ready"?'':'<div class="aempty">Loading data from Google Sheets…</div>')+'</div></div>';
     el.innerHTML=h; if(d.state==="ready") fillContent(k);
   } else { el.innerHTML=h+$("#buildTpl").innerHTML; }
 }
@@ -757,7 +756,7 @@ $("#boBody").addEventListener("input",e=>{ if(e.target.id!=="bq") return; const 
 const cmdM=$("#cmdModal"), cmdIn=$("#cmdIn"), cmdLog=$("#cmdLog");
 function say(t,cls){ const d=document.createElement("div"); if(cls) d.className=cls; d.textContent=t; cmdLog.appendChild(d); cmdLog.scrollTop=cmdLog.scrollHeight; }
 const cmdOut={set textContent(t){ say(t,/^(Wrong|Unknown|Admin mode is required|Usage)/.test(t)?"err":""); }};
-const HELP="Available commands:\n/help  – show all commands\n/admin <password>  – turn on admin mode (edit, change, delete)\n/admin off  – turn off admin mode\n/sheet <dispute|refund> <tab name>  – set the Google Sheet tab (admin only)\n/reload  – reload the Back Office data\n/clear  – clear this box\n\nOpen/close: press / and \\ together. Esc closes.";
+const HELP="Available commands:\n/help  – show all commands\n/admin <password>  – turn on admin mode (edit, change, delete)\n/admin off  – turn off admin mode\n/sheet <dispute|refund> <tab name>  – set the Google Sheet tab (admin only)\n/import <dispute|refund>  – load a CSV exported from the sheet (admin only)\n/reload  – reload the Back Office data\n/clear  – clear this box\n\nOpen/close: press / and \\ together. Esc closes.";
 const openCmd=()=>{ cmdM.hidden=false; setTimeout(()=>cmdIn.focus(),0); if(!cmdLog.childElementCount) say("Type /help to see all commands."); };
 const closeCmd=()=>{ cmdM.hidden=true; };
 function setAdmin(v){ admin=v; $("#adminBadge").hidden=!v; if(!v){ annForm=false; menu.hidden=true; } renderHome(); }
@@ -780,6 +779,20 @@ function runCmd(raw){
       SRC[k].tabs=k==="dispute"?{Dispute:parts[0]}:(parts.length>1?{Refund:parts[0],Reship:parts[1]}:{Refund:parts[0]});
       try{ const o=JSON.parse(localStorage.getItem("sb-tabs")||"{}"); o[k]=SRC[k].tabs; localStorage.setItem("sb-tabs",JSON.stringify(o)); }catch(e){}
       D[k].state="idle"; cmdOut.textContent="Tab set to: "+Object.values(SRC[k].tabs).join(" | ")+". Loading…"; if(BO.sub===k) renderBO(); else loadDash(k);
+    }
+  }
+  else if(c==="import"){
+    const k=(a[0]||"").toLowerCase();
+    if(!admin) cmdOut.textContent="Admin mode is required. Use /admin <password>.";
+    else if(!SRC[k]) cmdOut.textContent="Usage: /import dispute   or   /import refund";
+    else{
+      const f=document.createElement("input"); f.type="file"; f.accept=".csv,text/csv";
+      f.onchange=()=>{ const file=f.files[0]; if(!file) return; file.text().then(t=>{ try{
+        const n=norm(t,k==="dispute"?"Dispute":"Refund","file",SRC[k].cols), d=D[k];
+        d.rows=n.rows; d.hasAmt=n.hasAmt; d.demo=false; d.err=""; d.state="ready"; d.imported=file.name; BO.st[k].pg=0;
+        cmdOut.textContent="Imported "+n.rows.length+" records from "+file.name+"."; if(BO.sub===k) renderBO();
+      }catch(e){ cmdOut.textContent="Unknown file: "+e.message; } }); };
+      f.click(); cmdOut.textContent="Choose the CSV file (File > Download > CSV on the Dispute tab)…";
     }
   }
   else if(c==="reload"){ ["dispute","refund"].forEach(k=>{ if(D[k].state!=="idle") loadDash(k,true); }); cmdOut.textContent="Reloading Back Office data…"; }
